@@ -29,6 +29,12 @@ struct:
 int value
 char* shape
 
+Struct to include player and game details:
+char* name
+int gameswon
+char* filename
+
+
 
 
     
