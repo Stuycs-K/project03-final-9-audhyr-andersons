@@ -26,4 +26,5 @@ What algorithms and /or data structures you will be using, and how.
     
 # Intended pacing:
 
-A timeline with expected completion dates of parts of the project.
+By Monday the 8th we plan to have the basic logic of the game coded.
+We also plan to have all of the features we will implement thought out and writen in psudo code.
