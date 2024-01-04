@@ -10,7 +10,7 @@ Make the cardgame war in C.
     
 # Intended usage:
 
-Players can connect to the server to play war against a computer. They will be able to save and resume progress on a game. This can potentially end up with the server connecting to multiple players at once, with players having the option to play against each other.
+Players can connect to the server to play war against a computer. If we have time, we also plan to expand this to a server that can connect to and manage multiple games, potentially with things like leaderboard and game history information for players.
   
 # Technical Details:
 
