@@ -21,3 +21,4 @@ struct card * addAtEnd(struct card * beg, struct card * new){
     start->next = new;
     return beg;
 }
+
