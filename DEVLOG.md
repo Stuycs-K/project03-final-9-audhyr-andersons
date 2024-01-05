@@ -11,7 +11,7 @@ Then we asked Mr. K if he thought it would be enough for two people and that it 
 In class we further discussed our proposal and added to our technical details and pacing.
 We sorted out which data types we would use and decided that we would use two structs.
 
-For homework I 
+For homework I set up and created all the files I think we will need for our project.
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
