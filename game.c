@@ -6,3 +6,16 @@ struct card * newcard(int val, char* shape){
     return a;
 
 }
+//Adds the second card given to the end of the linked list and return the start
+//If given start of linked list is NULL, just returns the new card
+struct card * addAtEnd(struct card * beg, struct card * new){
+    struct card * start = beg;
+    if(start == null){
+        return new;
+    }
+    while(start->next != NULL){
+        start= start->next;
+    };
+    start->next = new;
+    return beg;
+}
