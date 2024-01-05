@@ -23,3 +23,7 @@ He said it was and then we started working on the Proposal.md.
 ### 2024-01-04 - Brief description
 In class we further discussed our proposal and added to our technical details and pacing.
 We sorted out which data types we would use and decided that we would use two structs.
+
+### 2024-01-05 - Brief description
+We discussed some of the structuring for how we'd make the game itself. I added a few includes, listed a few functions,
+and started writing the function to fill an empty deck.
