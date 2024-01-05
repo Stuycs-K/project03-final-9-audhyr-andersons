@@ -12,6 +12,11 @@ In class we further discussed our proposal and added to our technical details an
 We sorted out which data types we would use and decided that we would use two structs.
 
 For homework I set up and created all the files I think we will need for our project.
+
+### 2024-01-05 - Brief description
+I started setting up game.h with structs and includes. Then I set up functions to create cards and to add cards to the end of a linked list.
+I also updated the makefile to work a bit.
+
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
@@ -23,3 +28,5 @@ He said it was and then we started working on the Proposal.md.
 ### 2024-01-04 - Brief description
 In class we further discussed our proposal and added to our technical details and pacing.
 We sorted out which data types we would use and decided that we would use two structs.
+
+### 2024-01-05 - Brief description
