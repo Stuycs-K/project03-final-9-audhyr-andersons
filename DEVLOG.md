@@ -8,7 +8,10 @@ We decided to make the card game war in C and we thought about adding a save and
 Then we asked Mr. K if he thought it would be enough for two people and that it was a reasonable
 
 ### 2024-01-04 - Brief description
+In class we further discussed our proposal and added to our technical details and pacing.
+We sorted out which data types we would use and decided that we would use two structs.
 
+For homework I 
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
@@ -18,3 +21,5 @@ Then we asked Mr. K if he thought it would be enough for two people and that it 
 He said it was and then we started working on the Proposal.md.
 
 ### 2024-01-04 - Brief description
+In class we further discussed our proposal and added to our technical details and pacing.
+We sorted out which data types we would use and decided that we would use two structs.
