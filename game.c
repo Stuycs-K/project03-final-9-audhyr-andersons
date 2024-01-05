@@ -1,3 +1,5 @@
+
+//creates a new card based on the value and shape specified
 struct card * newcard(int val, char* shape){
     struct card *a=  malloc(24);
     a->value= val;
