@@ -15,14 +15,7 @@
 #define GAME_H
 
 #define BUFFER_SIZE 1024
+struct card {int value; char shape[10]; struct card *next;};
+struct player {char name[100]; int gameswon; char filename[1000]}
 
-struct node* card(char n[], char Artist[], struct node *next){
-    
-    struct node *a=  malloc(208);
-    strcpy(a->song, n);
-    strcpy(a->artist, Artist);
-    a->next = next;
-    return a;
-
-}
 #endif
