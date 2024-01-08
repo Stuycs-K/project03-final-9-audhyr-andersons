@@ -24,7 +24,7 @@ int main(){
    printdeck(origin);
    printf("\n\n");
    printf("%d,%s\n", origin->value,origin->shape);
-   //printcard(origin);
+   printcard(origin);
    printf("\n\n");
    //printnice(origin);
 }

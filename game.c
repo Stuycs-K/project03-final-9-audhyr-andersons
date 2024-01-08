@@ -25,21 +25,21 @@ struct card * addAtEnd(struct card * beg, struct card * new){
 void printdeck(struct card * beg){
     //struct car * beg = begg;
     while(beg!=NULL){
-        printf("Value: %d Shape %s\n", beg->value, beg->shape);
+        printf("Value: %d Shape %s\n", beg->value, beg->shape); 
         beg = beg->next;
     }
 }
 char* name(int value){
-    char buff[13][10]={ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    char *buff[13]={ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
     //printf("%s\n",buff[value-1]);
-    //return buff[value-2];
-    return "hi";
+    return buff[value];
+    //return "hi";
     
     
 }
 void printcard(struct card* beg){
-    //printf("%s of %s\n", name(beg->value), beg->shape);
-    printf("hi\n");
+    printf("%s of %s\n", name(beg->value), beg->shape);
+    //printf("hi\n");
 }
 
 void printnice(struct card * beg){
