@@ -16,6 +16,10 @@ For homework I set up and created all the files I think we will need for our pro
 ### 2024-01-05 - Brief description
 I started setting up game.h with structs and includes. Then I set up functions to create cards and to add cards to the end of a linked list.
 I also updated the makefile to work a bit.
+ 
+For hw I continued adding functions and make a file to test the functions in the game.c file
+I made functions for printing the deck of cards and preparing for how they will be printed in game.
+
 
 ## Riasat Audhy
 
