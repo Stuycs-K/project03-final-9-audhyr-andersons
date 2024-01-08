@@ -1,4 +1,4 @@
-
+#include "game.h"
 //creates a new card based on the value and shape specified
 struct card * newcard(int val, char* shape){
     struct card *a=  malloc(24);
@@ -12,7 +12,7 @@ struct card * newcard(int val, char* shape){
 //If given start of linked list is NULL, just returns the new card
 struct card * addAtEnd(struct card * beg, struct card * new){
     struct card * start = beg;
-    if(start == null){
+    if(start == NULL){
         return new;
     }
     while(start->next != NULL){
@@ -23,29 +23,28 @@ struct card * addAtEnd(struct card * beg, struct card * new){
 }
 
 void printdeck(struct card * beg){
+    //struct car * beg = begg;
     while(beg!=NULL){
-        printf("Value: %d Shape %s", beg->value, beg->shape);
+        printf("Value: %d Shape %s\n", beg->value, beg->shape);
         beg = beg->next;
     }
 }
 char* name(int value){
-    char str[10];
+    char buff[13][10]={ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    //printf("%s\n",buff[value-1]);
+    //return buff[value-2];
+    return "hi";
     
-    if(value <11){
-        sprintf(str, "%d", value);
-        return str;
-    }
-    switch(value){
-    case 11:
-    return "Jack";
-    case 12:
-    return "Queen";
-    case 13:
-    return "King";
-    case 14:
-    return "Ace";
-    }
+    
 }
-void printcard(struct card * beg){
-    printf("%s of %s", name(beg->value), beg->shape);
+int printcard(struct card* beg){
+    //printf("%s of %s\n", name(beg->value), beg->shape);
+    printf("hi\n");
+}
+
+int printnice(struct card * beg){
+    while(beg!=NULL){
+        printcard(beg);
+        beg=beg->next;
+    }
 }

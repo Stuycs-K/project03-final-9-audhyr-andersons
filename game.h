@@ -17,6 +17,12 @@
 
 #define BUFFER_SIZE 1024
 struct card {int value; char shape[10]; struct card *next;};
-struct player {char name[100]; int gameswon; char filename[1000]}
+struct player {char name[100]; int gameswon; char filename[1000];};
+struct card * addAtEnd(struct card * beg, struct card * new);
+struct card * newcard(int val, char* shape);
+void printdeck(struct card * beg);
+char* name(int value);
+void printcard(struct card * beg);
 
+void printnice(struct card * beg);
 #endif
