@@ -22,3 +22,9 @@ struct card * addAtEnd(struct card * beg, struct card * new){
     return beg;
 }
 
+void printdeck(struct card * beg){
+    while(beg!=NULL){
+        printf("Value: %d Shape %s", beg->value, beg->shape);
+        beg = beg->next;
+    }
+}
