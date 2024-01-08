@@ -21,6 +21,11 @@ For hw I continued adding functions and make a file to test the functions in the
 I made functions for printing the deck of cards and preparing for how they will be printed in game.
 
 
+### 2024-01-06 - Brief description
+I made a function to remove a card in the middle of the deck.
+I started on a function to actually play the game
+I started making a function to recursively call and handle war in case it happens many times in a row.
+
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
