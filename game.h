@@ -23,6 +23,6 @@ struct card * newcard(int val, char* shape);
 void printdeck(struct card * beg);
 char* name(int value);
 void printcard(struct card * beg);
-
+struct card* genDeck();
 void printnice(struct card * beg);
 #endif

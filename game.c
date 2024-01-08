@@ -51,23 +51,24 @@ void printnice(struct card * beg){
     }
 }
 
+// Generates a full deck
+struct card* genDeck(){
+    char *buff[4] = {"Hearts", "Clubs", "Diamonds", "Spades"};
+    struct card* deck = NULL;
+    
+    for(int i = 0; i < 4; i++){
+        for(int j = 2; j < 14; j++){
+            struct card* new = newcard(j, buff[i]);
+            deck = addAtEnd(deck, new);
+        }
+    }
+}
+
+
 /*Functions:
-Generate empty deck
-Fill deck
+Fill deck DONE
 full move
 Play card
 check cards
 Shuffle deck
 */
-
-// void fillDeck(struct card* deck){
-//     deck = newcard();
-    
-//     for(int i = 0; i < 3; i++){
-//         for(int j = 0; j < 13; j++){
-//             if(i+j != 0){
-                
-//             }
-//         }
-//     }
-// }

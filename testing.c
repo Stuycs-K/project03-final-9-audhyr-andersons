@@ -14,17 +14,18 @@
 #include <netdb.h>
 
 int main(){
-   struct card *origin= addAtEnd(NULL, newcard(10, "hearts")); 
-   origin = addAtEnd(origin, newcard(11, "hearts")); 
-   origin = addAtEnd(origin, newcard(12, "hearts")); 
-   origin = addAtEnd(origin, newcard(13, "hearts")); 
-   origin = addAtEnd(origin, newcard(14, "hearts")); 
-   origin = addAtEnd(origin, newcard(2, "spades")); 
-   origin = addAtEnd(origin, newcard(5, "clubs")); 
-   printdeck(origin);
-   printf("\n\n");
-   printf("%d,%s\n", origin->value,origin->shape);
-   printcard(origin);
-   printf("\n\n");
+   // struct card *origin= addAtEnd(NULL, newcard(10, "hearts")); 
+   // origin = addAtEnd(origin, newcard(11, "hearts")); 
+   // origin = addAtEnd(origin, newcard(12, "hearts")); 
+   // origin = addAtEnd(origin, newcard(13, "hearts")); 
+   // origin = addAtEnd(origin, newcard(14, "hearts")); 
+   // origin = addAtEnd(origin, newcard(2, "spades")); 
+   // origin = addAtEnd(origin, newcard(5, "clubs")); 
+   struct card *origin = genDeck();
    printnice(origin);
+   // printf("\n\n");
+   // printf("%d,%s\n", origin->value,origin->shape);
+   // printcard(origin);
+   // printf("\n\n");
+   //
 }
