@@ -26,5 +26,5 @@ int main(){
    printf("%d,%s\n", origin->value,origin->shape);
    printcard(origin);
    printf("\n\n");
-   //printnice(origin);
+   printnice(origin);
 }

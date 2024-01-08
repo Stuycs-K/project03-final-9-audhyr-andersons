@@ -31,8 +31,9 @@ void printdeck(struct card * beg){
 }
 char* name(int value){
     char *buff[13]={ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    //                0      1        2       3       4      5        6        7       8      9       10       11      12
     //printf("%s\n",buff[value-1]);
-    return buff[value];
+    return buff[value-2];
     //return "hi";
     
     
@@ -44,6 +45,7 @@ void printcard(struct card* beg){
 
 void printnice(struct card * beg){
     while(beg!=NULL){
+        //printf("%d ", beg->value);
         printcard(beg);
         beg=beg->next;
     }
