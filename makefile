@@ -10,8 +10,11 @@ networking.o: networking.c
 	@gcc -c networking.c 
 testing.o: testing.c game.h
 	@gcc -c testing.c 
-tests: testing.o
+tests: game.o testing.o
 	@gcc -o tests testing.o game.o
 test: tests
 	@./tests
+
+clean:
+	@rm -f *.o
 

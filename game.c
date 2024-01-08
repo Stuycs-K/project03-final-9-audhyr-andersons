@@ -37,12 +37,12 @@ char* name(int value){
     
     
 }
-int printcard(struct card* beg){
+void printcard(struct card* beg){
     //printf("%s of %s\n", name(beg->value), beg->shape);
     printf("hi\n");
 }
 
-int printnice(struct card * beg){
+void printnice(struct card * beg){
     while(beg!=NULL){
         printcard(beg);
         beg=beg->next;
@@ -58,14 +58,14 @@ check cards
 Shuffle deck
 */
 
-void fillDeck(struct card* deck){
-    deck = newCard();
+// void fillDeck(struct card* deck){
+//     deck = newcard();
     
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 13; j++){
-            if(i+j != 0){
+//     for(int i = 0; i < 3; i++){
+//         for(int j = 0; j < 13; j++){
+//             if(i+j != 0){
                 
-            }
-        }
-    }
-}
+//             }
+//         }
+//     }
+// }
