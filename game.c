@@ -103,6 +103,13 @@ int deckSize(struct card* deck){
     return size;
 }
 
+void saveGame(char* player, struct card* pDeck, struct card* sDeck, int turn){
+    char* saveName = malloc(sizeof(char)*100);
+    strcat(saveGame, "./");
+    strcat(saveGame, player);
+
+    int saveFile = open(saveName, O_WR)
+}
 
 /*Functions:
 Fill deck DONE
