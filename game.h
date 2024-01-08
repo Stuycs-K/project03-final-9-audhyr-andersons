@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <sys/socket.h> 
 #include <netdb.h>
+#include <time.h>
 
 #ifndef GAME_H
 #define GAME_H
@@ -24,5 +25,7 @@ void printdeck(struct card * beg);
 char* name(int value);
 void printcard(struct card * beg);
 struct card* genDeck();
+struct card* shuffleDeck(struct card* deck);
+struct card* topcard(struct card**deck);
 void printnice(struct card * beg);
 #endif

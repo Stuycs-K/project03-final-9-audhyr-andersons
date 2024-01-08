@@ -62,6 +62,34 @@ struct card* genDeck(){
             deck = addAtEnd(deck, new);
         }
     }
+    
+    return deck;
+}
+
+// Shuffles a given deck
+struct card* shuffleDeck(struct card* deck){
+    struct card* s1 = NULL;
+    struct card* s2 = NULL;
+    srand(time(NULL));
+
+    for(int z = 0; z < 1000; z++){
+        while(deck != NULL){
+            if(rand()%2) s1 = addAtEnd(s1, topcard(&deck));
+            else s2 = addAtEnd(s2, topcard(&deck));
+        }
+
+        while(s1 != NULL) deck = addAtEnd(deck, topcard(&s1));
+        while(s2 != NULL) deck = addAtEnd(deck, topcard(&s2));
+    }
+    return deck;
+}
+
+
+// Removes the top card and returns it
+struct card* topcard(struct card** deck){
+    struct card* new = newcard((*deck)->value, (*deck)->shape);
+    *deck = ((*deck)->next);
+    return new;
 }
 
 

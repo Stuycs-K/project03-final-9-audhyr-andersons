@@ -23,6 +23,13 @@ int main(){
    // origin = addAtEnd(origin, newcard(5, "clubs")); 
    struct card *origin = genDeck();
    printnice(origin);
+   printf("--------\n");
+   origin = shuffleDeck(origin);
+   printf("---------\n");
+   printnice(origin);
+   printf("---------\n");
+   // topcard(&origin);
+   // printcard(origin);
    // printf("\n\n");
    // printf("%d,%s\n", origin->value,origin->shape);
    // printcard(origin);
