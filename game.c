@@ -57,7 +57,7 @@ struct card* genDeck(){
     struct card* deck = NULL;
     
     for(int i = 0; i < 4; i++){
-        for(int j = 2; j < 14; j++){
+        for(int j = 2; j < 15; j++){
             struct card* new = newcard(j, buff[i]);
             deck = addAtEnd(deck, new);
         }
@@ -90,6 +90,17 @@ struct card* topcard(struct card** deck){
     struct card* new = newcard((*deck)->value, (*deck)->shape);
     *deck = ((*deck)->next);
     return new;
+}
+
+// count cards
+int deckSize(struct card* deck){
+    int size = 0;
+    while(deck != NULL){
+        size++;
+        deck = deck->next;
+    }
+
+    return size;
 }
 
 

@@ -28,4 +28,5 @@ struct card* genDeck();
 struct card* shuffleDeck(struct card* deck);
 struct card* topcard(struct card**deck);
 void printnice(struct card * beg);
+int deckSize(struct card * deck);
 #endif

@@ -28,6 +28,7 @@ int main(){
    printf("---------\n");
    printnice(origin);
    printf("---------\n");
+   printf("%d\n", deckSize(origin));
    // topcard(&origin);
    // printcard(origin);
    // printf("\n\n");
