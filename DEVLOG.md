@@ -39,3 +39,7 @@ and started writing the function to fill an empty deck.
 
 For hw I fixed a few typos and small errors. And then I finished the function to generate a deck and made a function to shuffle
 the deck. Everything in game.c should be working. I also added on to the makefile a bit. 
+
+### 2024-01-06 - Brief description
+We planned out how to structure turns in the game. I added a function to count the number of cards in a deck, and started working on
+a function to save the game.
