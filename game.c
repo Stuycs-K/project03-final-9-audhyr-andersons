@@ -57,7 +57,7 @@ struct card* genDeck(){
     struct card* deck = NULL;
     
     for(int i = 0; i < 4; i++){
-        for(int j = 2; j < 14; j++){
+        for(int j = 2; j < 15; j++){
             struct card* new = newcard(j, buff[i]);
             deck = addAtEnd(deck, new);
         }
@@ -90,6 +90,66 @@ struct card* topcard(struct card** deck){
     struct card* new = newcard((*deck)->value, (*deck)->shape);
     *deck = ((*deck)->next);
     return new;
+}
+
+struct card * removeindex(struct card * deck, int index){
+    struct card * prev;
+    for(int i =1;i<index;i++){
+        prev = deck;
+        deck=deck->next;
+    }
+    prev->next = deck->next;
+    return deck;
+
+}
+struct card * war(struct card * pile, struct card * p1, struct card * p2){
+//continue function
+    temp1=p1;
+        temp2=p2;
+        for(int i =0;i<2; i++){
+            addAtEnd(pile,topcard(p1));
+            addAtEnd(pile,topcard(p2));
+            
+            
+        }
+}
+// Server plays the game and sends the content required to play to the client
+struct card* game(struct card * p1, int c1, struct card* p2, int c2){
+    struct card * temp1=p1;
+    if(c1 >1){
+        for(int num =1; num < c1; num++ ){
+            temp1=temp1->next;
+        }
+    }
+    struct card * temp2=p2;
+    if(c2 >1){
+        for(int num =1; num < c2; num++ ){
+            temp2=temp2->next;
+        }
+    }
+    struct card * pile;
+    addAtEnd(pile, removeindex(p1,c1));
+    addAtEnd(pile, removeindex(p2,c2));
+    if(pile->value > pile->next->value){
+        while(pile!=NULL){
+            addAtEnd(p1,pile);
+            pile=pile->next;
+        }
+    }
+    if(pile->value < pile->next->value){
+        while(pile!=NULL){
+            addAtEnd(p2,pile);
+            pile=pile->next;
+        }
+    }
+    if(pile->value == pile->next->value){
+        war(struct card* pile, struct card *p1, struct card * p2)
+        
+        //technically could have infinite wars
+
+    }
+    //if(temp1->value>temp2->value);
+
 }
 
 
