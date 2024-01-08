@@ -36,3 +36,6 @@ We sorted out which data types we would use and decided that we would use two st
 ### 2024-01-05 - Brief description
 We discussed some of the structuring for how we'd make the game itself. I added a few includes, listed a few functions,
 and started writing the function to fill an empty deck.
+
+For hw I fixed a few typos and small errors. And then I finished the function to generate a deck and made a function to shuffle
+the deck. Everything in game.c should be working. I also added on to the makefile a bit. 
