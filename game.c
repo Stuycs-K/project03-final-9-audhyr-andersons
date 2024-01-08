@@ -99,6 +99,7 @@ struct card * removeindex(struct card * deck, int index){
         deck=deck->next;
     }
     prev->next = deck->next;
+    deck->next=NULL;
     return deck;
 
 }
