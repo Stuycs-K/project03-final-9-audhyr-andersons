@@ -28,3 +28,24 @@ void printdeck(struct card * beg){
         beg = beg->next;
     }
 }
+char* name(int value){
+    char str[10];
+    
+    if(value <11){
+        sprintf(str, "%d", value);
+        return str;
+    }
+    switch(value){
+    case 11:
+    return "Jack";
+    case 12:
+    return "Queen";
+    case 13:
+    return "King";
+    case 14:
+    return "Ace";
+    }
+}
+void printcard(struct card * beg){
+    printf("%s of %s", name(beg->value), beg->shape);
+}
