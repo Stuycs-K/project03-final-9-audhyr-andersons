@@ -22,11 +22,13 @@ I made functions for printing the deck of cards and preparing for how they will 
 Finished setting up war code and testing it and finished game logic
 
 
-### 2024-01-06 - Brief description
+### 2024-01-08 - Brief description
 I made a function to remove a card in the middle of the deck.
 I started on a function to actually play the game
 I started making a function to recursively call and handle war in case it happens many times in a row.
 
+### 2024-01-09 - Brief description
+Added networking code and started on server logic for prompting user and making the game work.
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
