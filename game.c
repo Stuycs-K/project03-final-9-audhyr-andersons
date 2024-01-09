@@ -200,13 +200,23 @@ int games(struct card * p1, int c1, struct card* p2, int c2){
 
 }
 
-void saveGame(char* player, struct card* pDeck, struct card* sDeck, int turn){
+// Saves the game to a file named whatever the player name is, with
+// the player deck being written to the file first.
+void saveGame(char* player, struct card* pDeck, struct card* sDeck){
     char* saveName = malloc(sizeof(char)*100);
-    strcat(saveGame, "./");
-    strcat(saveGame, player);
+    strcat(saveName, "./");
+    strcat(saveName, player);
 
-    int saveFile = open(saveName, O_WR)
+    int saveFile = open(saveName, O_WRONLY | O_CREAT, 0644);
+
+    write(saveFile, pDeck, sizeof(struct card));
+    write(saveFile, sDeck, sizeof(struct card));
+
+    free(saveName);
+    close(saveFile);
 }
+
+
 
 /*Functions:
 Fill deck DONE
