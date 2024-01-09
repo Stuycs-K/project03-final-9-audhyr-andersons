@@ -44,11 +44,16 @@ void printcard(struct card* beg){
 }
 
 void printnice(struct card * beg){
+    if(beg==NULL){
+        printf("Empty Deck"
+        );
+    }
     while(beg!=NULL){
         //printf("%d ", beg->value);
         printcard(beg);
         beg=beg->next;
     }
+    
 }
 
 // Generates a full deck
@@ -100,7 +105,99 @@ int deckSize(struct card* deck){
         deck = deck->next;
     }
 
-    return size;
+    return size;}
+    
+struct card * removeindex(struct card * deck, int index){
+    struct card * prev;
+    for(int i =1;i<index;i++){
+        prev = deck;
+        deck=deck->next;
+    }
+    prev->next = deck->next;
+    deck->next=NULL;
+    return deck;
+
+}
+int war(struct card * pile, struct card * p1, struct card * p2){
+//continue function
+        struct card * temp1=p1;
+        struct card * temp2=p2;
+        struct card* temp3=pile;
+        for(int i =0;i<3; i++){
+            pile =addAtEnd(pile,topcard(&p1));
+            pile =addAtEnd(pile,topcard(&p2));
+        }
+        struct card* prev;
+        while(temp3->next!=NULL){
+            prev = temp3;
+            temp3 = temp3->next;
+            
+        }
+        if(prev->value == temp3->value){
+            war(pile, p1,p2);
+        }
+        if(prev->value > temp3->value){
+            while(pile!=NULL){
+                addAtEnd(p1,topcard(&pile));
+            }
+        }
+        if(prev->value < temp3->value){
+            while(pile!=NULL){
+                addAtEnd(p2,topcard(&pile));
+            }
+        }
+        return 1;
+        
+    
+}
+// Server plays the game and sends the content required to play to the client
+int games(struct card * p1, int c1, struct card* p2, int c2){
+    struct card * temp1=p1;
+    if(c1 >1){
+        for(int num =1; num < c1; num++ ){
+            temp1=temp1->next;
+        }
+    }
+    struct card * temp2=p2;
+    if(c2 >1){
+        for(int num =1; num < c2; num++ ){
+            temp2=temp2->next;
+        }
+    }
+    struct card * pile;
+    
+    pile =addAtEnd(pile, removeindex(p1,c1));
+    pile =addAtEnd(pile, removeindex(p2,c2));
+    // pile =addAtEnd(pile, topcard(&p1));
+    // pile =addAtEnd(pile, topcard(&p2));
+    printnice(pile);
+    if(pile->value > (pile->next)->value){
+        while(pile!=NULL){
+            addAtEnd(p1,topcard(&pile));
+            
+         
+        }
+    }
+    else if(pile->value < (pile->next)->value){
+        
+
+        while(pile!=NULL){
+            
+            addAtEnd(p2,topcard(&pile));
+           
+            
+        }
+    }
+    else if(pile->value == (pile->next)->value){
+        war( pile,  p1,  p2);
+        
+        
+        //technically could have infinite wars
+
+    }
+    return 1;
+    //if(temp1->value>temp2->value);
+
 }
 
 void saveGame(char* player, struct card* pDeck, struct card* sDeck, int turn){

@@ -19,7 +19,13 @@ I also updated the makefile to work a bit.
  
 For hw I continued adding functions and make a file to test the functions in the game.c file
 I made functions for printing the deck of cards and preparing for how they will be printed in game.
+Finished setting up war code and testing it and finished game logic
 
+
+### 2024-01-06 - Brief description
+I made a function to remove a card in the middle of the deck.
+I started on a function to actually play the game
+I started making a function to recursively call and handle war in case it happens many times in a row.
 
 ## Riasat Audhy
 
@@ -39,3 +45,7 @@ and started writing the function to fill an empty deck.
 
 For hw I fixed a few typos and small errors. And then I finished the function to generate a deck and made a function to shuffle
 the deck. Everything in game.c should be working. I also added on to the makefile a bit. 
+
+### 2024-01-06 - Brief description
+We planned out how to structure turns in the game. I added a function to count the number of cards in a deck, and started working on
+a function to save the game.

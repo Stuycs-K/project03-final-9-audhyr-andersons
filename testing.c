@@ -22,13 +22,28 @@ int main(){
    // origin = addAtEnd(origin, newcard(2, "spades")); 
    // origin = addAtEnd(origin, newcard(5, "clubs")); 
    struct card *origin = genDeck();
+   struct card *origin2 = genDeck();
+   origin2 = shuffleDeck(origin2);
    printnice(origin);
    printf("--------\n");
    origin = shuffleDeck(origin);
+   origin = shuffleDeck(origin);
+   //printf("---------\n");
+   printnice(origin);
+   printf("---------\n");
+   printnice(origin2);
+   printf("---------\n");
+   games(origin, 2, origin2, 2);
    printf("---------\n");
    printnice(origin);
    printf("---------\n");
    printf("%d\n", deckSize(origin));
+   printnice(origin2);
+   printf("---------\n");
+   //printnice(origin2);
+   //printf("---------\n");
+   //printnice(origin);
+
    // topcard(&origin);
    // printcard(origin);
    // printf("\n\n");
