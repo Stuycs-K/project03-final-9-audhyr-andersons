@@ -211,12 +211,10 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
 
     int pSize = deckSize(pDeck);
     write(saveFile, &pSize, sizeof(int));
-
-    while(pDeck != NULL) write(saveFile, topcard(&pDeck), sizeof(struct card));
-
     int sSize = deckSize(sDeck);
     write(saveFile, &sSize, sizeof(int));
 
+    while(pDeck != NULL) write(saveFile, topcard(&pDeck), sizeof(struct card));
     while(sDeck != NULL) write(saveFile, topcard(&sDeck), sizeof(struct card));
     // while(sDeck != NULL) {
     //     struct card* test = topcard(&sDeck);
@@ -246,27 +244,20 @@ void loadGame(char* player, struct card** pDeck, struct card** sDeck){
     int sSize = 0;
 
     read(saveFile, &pSize, sizeof(int));
-    for(int i = 0; i < pSize-1; i++){
+    read(saveFile, &sSize, sizeof(int));
+
+    for(int i = 0; i < pSize; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
         pTemp = addAtEnd(pTemp, new);
         if(i == 0) *pDeck = pTemp;
     }
-
-    read(saveFile, &sSize, sizeof(int));
-    printf("%d\n", sSize);
-    for(int i = 0; i < sSize-1; i++){
-        struct card* new2 = malloc(sizeof(struct card));
-        read(saveFile, new2, sizeof(struct card));
-        printf("|%ld| |%ld|\n", sizeof(*new2), sizeof(struct card));
-        printf("|%p|\n", new2);
-        printcard(new2);
-        //printcard(new2);
-        //sTemp = addAtEnd(sTemp, new);
-        //if(i == 0) *sDeck = sTemp;
+    for(int i = 0; i < sSize; i++){
+        struct card* new = malloc(sizeof(struct card));
+        read(saveFile, new, sizeof(struct card));
+        sTemp = addAtEnd(sTemp, new);
+        if(i == 0) *sDeck = sTemp;
     }
-
-
 
     free(saveName);
     close(saveFile);
