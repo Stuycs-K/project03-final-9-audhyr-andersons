@@ -12,7 +12,7 @@ struct card * newcard(int val, char* shape){
 //If given start of linked list is NULL, just returns the new card
 struct card * addAtEnd(struct card * beg, struct card * new){
     struct card * start = beg;
-    if(start == NULL){
+    if(start == NULL || start->value == 0){
         return new;
     }
     while(start->next != NULL){
@@ -24,7 +24,7 @@ struct card * addAtEnd(struct card * beg, struct card * new){
 
 void printdeck(struct card * beg){
     //struct car * beg = begg;
-    while(beg!=NULL){
+    while(beg!=NULL && beg->value != 0){
         printf("Value: %d Shape %s\n", beg->value, beg->shape); 
         beg = beg->next;
     }
@@ -44,7 +44,7 @@ void printcard(struct card* beg){
 }
 
 void printnice(struct card * beg){
-    if(beg==NULL){
+    if(beg==NULL || beg->value == 0){
         printf("Empty Deck"
         );
     }
@@ -100,7 +100,7 @@ struct card* topcard(struct card** deck){
 // count cards
 int deckSize(struct card* deck){
     int size = 0;
-    while(deck != NULL){
+    while(deck != NULL && deck->value != 0){
         size++;
         deck = deck->next;
     }
@@ -227,7 +227,7 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
 // decks
 void loadGame(char* player, struct card* pDeck, struct card* sDeck){
     // pDeck = NULL;
-    // sDeck = NULL;
+     sDeck = NULL;
 
     char* saveName = malloc(sizeof(char)*100);
     strcat(saveName, "./");
@@ -243,21 +243,20 @@ void loadGame(char* player, struct card* pDeck, struct card* sDeck){
     for(int i = 0; i < pSize-1; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
+        //printdeck(new);
         pDeck = addAtEnd(pDeck, new);
-        printf("i: %d, dsize: %d\n", i, deckSize(pDeck));
-        printcard(pDeck);
     }
+
+    printnice(pDeck);
 
     read(saveFile, &sSize, sizeof(int));
     //printf("sSize: %d\n", sSize);
     for(int i = 0; i < sSize-1; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
-        sDeck = addAtEnd(sDeck, new);
+        //sDeck = addAtEnd(sDeck, new);
     }
 
-    read(saveFile, pDeck, sizeof(struct card));
-    read(saveFile, sDeck, sizeof(struct card));
 
     free(saveName);
     close(saveFile);
