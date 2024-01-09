@@ -14,41 +14,16 @@
 #include <netdb.h>
 
 int main(){
-   // struct card *origin= addAtEnd(NULL, newcard(10, "hearts")); 
-   // origin = addAtEnd(origin, newcard(11, "hearts")); 
-   // origin = addAtEnd(origin, newcard(12, "hearts")); 
-   // origin = addAtEnd(origin, newcard(13, "hearts")); 
-   // origin = addAtEnd(origin, newcard(14, "hearts")); 
-   // origin = addAtEnd(origin, newcard(2, "spades")); 
-   // origin = addAtEnd(origin, newcard(5, "clubs")); 
+   srand(time(NULL));
+
    struct card *origin = genDeck();
    struct card *origin2 = genDeck();
+   origin = shuffleDeck(origin);
    origin2 = shuffleDeck(origin2);
-   printnice(origin);
-   printf("--------\n");
-   origin = shuffleDeck(origin);
-   origin = shuffleDeck(origin);
-   //printf("---------\n");
-   printnice(origin);
-   printf("---------\n");
-   printnice(origin2);
-   printf("---------\n");
-   games(origin, 2, origin2, 2);
-   printf("---------\n");
-   printnice(origin);
-   printf("---------\n");
-   printf("%d\n", deckSize(origin));
-   printnice(origin2);
-   printf("---------\n");
-   //printnice(origin2);
-   //printf("---------\n");
-   //printnice(origin);
 
-   // topcard(&origin);
-   // printcard(origin);
-   // printf("\n\n");
-   // printf("%d,%s\n", origin->value,origin->shape);
-   // printcard(origin);
-   // printf("\n\n");
-   //
+   printf("Origin:\n");
+   printnice(origin);
+   printf("------------\n\nOrigin 2:\n");
+   printnice(origin2);
+   
 }

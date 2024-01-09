@@ -75,7 +75,7 @@ struct card* genDeck(){
 struct card* shuffleDeck(struct card* deck){
     struct card* s1 = NULL;
     struct card* s2 = NULL;
-    srand(time(NULL));
+    //srand(time(NULL));
 
     for(int z = 0; z < 1000; z++){
         while(deck != NULL){
