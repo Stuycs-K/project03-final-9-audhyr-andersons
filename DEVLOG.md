@@ -48,9 +48,11 @@ and started writing the function to fill an empty deck.
 For hw I fixed a few typos and small errors. And then I finished the function to generate a deck and made a function to shuffle
 the deck. Everything in game.c should be working. I also added on to the makefile a bit. 
 
-### 2024-01-06 - Brief description
+### 2024-01-08 - Brief description
 We planned out how to structure turns in the game. I added a function to count the number of cards in a deck, and started working on
 a function to save the game.
 
-### 2024-01-07 - Brief description
+### 2024-01-09 - Brief description
 (spent a few hours before class) I worked on saveGame and loadGame. Save game seems to work fully, loadGame loads in the cards and successfully loads one of the decks, but has a bus error when I try loading the other one (with the exact same code). I also moved the random seed to main to improve shuffling. I also modified addAtEnd, printDeck, printNice, deckSize to handle malloc'd but still empty decks.
+
+In class I spent the entire period working on loadGame, and now loadGame and saveGame both fully work.
