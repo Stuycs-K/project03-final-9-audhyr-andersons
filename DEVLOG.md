@@ -19,6 +19,7 @@ I also updated the makefile to work a bit.
  
 For hw I continued adding functions and make a file to test the functions in the game.c file
 I made functions for printing the deck of cards and preparing for how they will be printed in game.
+Finished setting up war code and testing it and finished game logic
 
 
 ### 2024-01-06 - Brief description
