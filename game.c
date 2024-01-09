@@ -209,20 +209,45 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
 
     int saveFile = open(saveName, O_WRONLY | O_CREAT, 0644);
 
-    write(saveFile, pDeck, sizeof(struct card));
-    write(saveFile, sDeck, sizeof(struct card));
+    int pSize = deckSize(pDeck);
+    write(saveFile, &pSize, sizeof(int));
+
+    while(pDeck != NULL) write(saveFile, topcard(&pDeck), sizeof(struct card));
+
+    int sSize = deckSize(sDeck);
+    write(saveFile, &sSize, sizeof(int));
+
+    while(sDeck != NULL) write(saveFile, topcard(&sDeck), sizeof(struct card));
 
     free(saveName);
     close(saveFile);
 }
 
-// Loads a game from a file with the same name as the player
+// Loads a game from a file with the same name as the player into
+// empty decks
 void loadGame(char* player, struct card* pDeck, struct card* sDeck){
     char* saveName = malloc(sizeof(char)*100);
     strcat(saveName, "./");
     strcat(saveName, player);
 
     int saveFile = open(saveName, O_RDONLY, 0);
+
+    int pSize = 0;
+    int sSize = 0;
+
+    read(saveFile, &pSize, sizeof(int));
+    for(int i = 0; i < pSize; i++){
+        struct card* new = malloc(sizeof(struct card));
+        read(saveFile, new, sizeof(struct card));
+        addAtEnd(pDeck, new);
+    }
+
+    read(saveFile, &sSize, sizeof(int));
+    for(int i = 0; i < sSize; i++){
+        struct card* new = malloc(sizeof(struct card));
+        read(saveFile, new, sizeof(struct card));
+        addAtEnd(sDeck, new);
+    }
 
     read(saveFile, pDeck, sizeof(struct card));
     read(saveFile, sDeck, sizeof(struct card));
