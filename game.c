@@ -103,16 +103,37 @@ struct card * removeindex(struct card * deck, int index){
     return deck;
 
 }
-struct card * war(struct card * pile, struct card * p1, struct card * p2){
+int war(struct card * pile, struct card * p1, struct card * p2){
 //continue function
-    temp1=p1;
-        temp2=p2;
-        for(int i =0;i<2; i++){
+        struct card * temp1=p1;
+        struct card * temp2=p2;
+        struct card* temp3=pile;
+        for(int i =0;i<3; i++){
             addAtEnd(pile,topcard(p1));
             addAtEnd(pile,topcard(p2));
-            
+        }
+        struct card* prev;
+        while(temp3->next!=NULL){
+            prev = temp3;
+            temp3 = temp3->next;
             
         }
+        if(prev->value == temp3->value){
+            war(pile, p1,p2);
+        }
+        if(prev->value > temp3->value){
+            while(pile!=NULL){
+                addAtend(p1,topcard(pile));
+            }
+        }
+        if(prev->value < temp3->value){
+            while(pile!=NULL){
+                addAtend(p2,topcard(pile));
+            }
+        }
+        return 1;
+        
+    
 }
 // Server plays the game and sends the content required to play to the client
 struct card* game(struct card * p1, int c1, struct card* p2, int c2){
