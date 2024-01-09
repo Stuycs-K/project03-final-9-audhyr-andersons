@@ -224,8 +224,11 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
 }
 
 // Loads a game from a file with the same name as the player into
-// empty decks
+// decks
 void loadGame(char* player, struct card* pDeck, struct card* sDeck){
+    // pDeck = NULL;
+    // sDeck = NULL;
+
     char* saveName = malloc(sizeof(char)*100);
     strcat(saveName, "./");
     strcat(saveName, player);
@@ -236,17 +239,21 @@ void loadGame(char* player, struct card* pDeck, struct card* sDeck){
     int sSize = 0;
 
     read(saveFile, &pSize, sizeof(int));
-    for(int i = 0; i < pSize; i++){
+    //printf("Psize: %d dSize: %d\n", pSize, deckSize(pDeck));
+    for(int i = 0; i < pSize-1; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
-        addAtEnd(pDeck, new);
+        pDeck = addAtEnd(pDeck, new);
+        printf("i: %d, dsize: %d\n", i, deckSize(pDeck));
+        printcard(pDeck);
     }
 
     read(saveFile, &sSize, sizeof(int));
-    for(int i = 0; i < sSize; i++){
+    //printf("sSize: %d\n", sSize);
+    for(int i = 0; i < sSize-1; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
-        addAtEnd(sDeck, new);
+        sDeck = addAtEnd(sDeck, new);
     }
 
     read(saveFile, pDeck, sizeof(struct card));

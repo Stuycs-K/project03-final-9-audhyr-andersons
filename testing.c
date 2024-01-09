@@ -24,12 +24,13 @@ int main(){
    // origin2 = shuffleDeck(origin2);
    origin = malloc(sizeof(struct card));
    origin2 = malloc(sizeof(struct card));
+   //printf("%d\n", deckSize(origin));
    loadGame("player", origin, origin2);
 
-   printf("Origin:\n");
-   printnice(origin);
-   printf("------------\n\nOrigin 2:\n");
-   printnice(origin2);
+   printf("Origin: %d\n", deckSize(origin));
+   //printdeck(origin);
+   //printf("------------\n\nOrigin 2: %d\n", deckSize(origin2));
+   //printnice(origin2);
 
    //saveGame("player", origin, origin2);
 }
