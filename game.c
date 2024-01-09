@@ -216,6 +216,21 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
     close(saveFile);
 }
 
+// Loads a game from a file with the same name as the player
+void loadGame(char* player, struct card* pDeck, struct card* sDeck){
+    char* saveName = malloc(sizeof(char)*100);
+    strcat(saveName, "./");
+    strcat(saveName, player);
+
+    int saveFile = open(saveName, O_RDONLY, 0);
+
+    read(saveFile, pDeck, sizeof(struct card));
+    read(saveFile, sDeck, sizeof(struct card));
+
+    free(saveName);
+    close(saveFile);
+}
+
 
 
 /*Functions:

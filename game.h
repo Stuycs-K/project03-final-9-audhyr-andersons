@@ -32,4 +32,6 @@ int deckSize(struct card * deck);
 int games(struct card * p1, int c1, struct card* p2, int c2);
 int war(struct card * pile, struct card * p1, struct card * p2);
 struct card * removeindex(struct card * deck, int index);
+void saveGame(char* player, struct card* pDeck, struct card* sDeck);
+void loadGame(char* player, struct card* pDeck, struct card* sDeck);
 #endif
