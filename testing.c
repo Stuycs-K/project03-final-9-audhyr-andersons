@@ -22,15 +22,15 @@ int main(){
    // origin2 = genDeck();
    // origin = shuffleDeck(origin);
    // origin2 = shuffleDeck(origin2);
-   origin = malloc(sizeof(struct card));
-   origin2 = malloc(sizeof(struct card));
    //printf("%d\n", deckSize(origin));
-   loadGame("player", origin, origin2);
+   //if(origin->shape == NULL) printf("yay\n");
+   loadGame("player", &origin, &origin2);
+   //printnice(origin);
 
-   printf("Origin: %d\n", deckSize(origin));
-   //printdeck(origin);
-   //printf("------------\n\nOrigin 2: %d\n", deckSize(origin2));
-   //printnice(origin2);
+   // printf("Origin: %d\n", deckSize(origin));
+   // printdeck(origin);
+   // printf("------------\n\nOrigin 2: %d\n", deckSize(origin2));
+   // printnice(origin2);
 
    //saveGame("player", origin, origin2);
 }

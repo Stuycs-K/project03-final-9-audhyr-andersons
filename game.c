@@ -218,6 +218,11 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
     write(saveFile, &sSize, sizeof(int));
 
     while(sDeck != NULL) write(saveFile, topcard(&sDeck), sizeof(struct card));
+    // while(sDeck != NULL) {
+    //     struct card* test = topcard(&sDeck);
+    //     write(saveFile, test, sizeof(struct card));
+    //     printcard(test);
+    // }
 
     free(saveName);
     close(saveFile);
@@ -225,9 +230,11 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck){
 
 // Loads a game from a file with the same name as the player into
 // decks
-void loadGame(char* player, struct card* pDeck, struct card* sDeck){
-    // pDeck = NULL;
-     sDeck = NULL;
+void loadGame(char* player, struct card** pDeck, struct card** sDeck){
+    *pDeck = NULL;
+    *sDeck = NULL;
+    struct card* pTemp = NULL;
+    struct card* sTemp = NULL;
 
     char* saveName = malloc(sizeof(char)*100);
     strcat(saveName, "./");
@@ -239,23 +246,26 @@ void loadGame(char* player, struct card* pDeck, struct card* sDeck){
     int sSize = 0;
 
     read(saveFile, &pSize, sizeof(int));
-    //printf("Psize: %d dSize: %d\n", pSize, deckSize(pDeck));
     for(int i = 0; i < pSize-1; i++){
         struct card* new = malloc(sizeof(struct card));
         read(saveFile, new, sizeof(struct card));
-        //printdeck(new);
-        pDeck = addAtEnd(pDeck, new);
+        pTemp = addAtEnd(pTemp, new);
+        if(i == 0) *pDeck = pTemp;
     }
-
-    printnice(pDeck);
 
     read(saveFile, &sSize, sizeof(int));
-    //printf("sSize: %d\n", sSize);
+    printf("%d\n", sSize);
     for(int i = 0; i < sSize-1; i++){
-        struct card* new = malloc(sizeof(struct card));
-        read(saveFile, new, sizeof(struct card));
-        //sDeck = addAtEnd(sDeck, new);
+        struct card* new2 = malloc(sizeof(struct card));
+        read(saveFile, new2, sizeof(struct card));
+        printf("|%ld| |%ld|\n", sizeof(*new2), sizeof(struct card));
+        printf("|%p|\n", new2);
+        printcard(new2);
+        //printcard(new2);
+        //sTemp = addAtEnd(sTemp, new);
+        //if(i == 0) *sDeck = sTemp;
     }
+
 
 
     free(saveName);
