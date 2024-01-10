@@ -19,7 +19,7 @@ hints->ai_family = AF_INET;
 hints->ai_socktype = SOCK_STREAM; //TCP socket
 //hints->ai_flags = AI_PASSIVE; //only needed on server
 //getaddrinfo(NULL, “80”, hints, &results);  //Server sets node to NULL
-getaddrinfo(server_address, "9000", hints, &results); //"149.89.150.100"
+getaddrinfo(server_address, PORT, hints, &results); //"149.89.150.100"
   
 //create socket
 int sd = socket(AF_INET, SOCK_STREAM, 0);
@@ -69,7 +69,7 @@ hints = calloc(1,sizeof(struct addrinfo));
 hints->ai_family = AF_INET;
 hints->ai_socktype = SOCK_STREAM; //TCP socket
 hints->ai_flags = AI_PASSIVE; //only needed on server
-getaddrinfo(NULL, "9000", hints, &results);  //Server sets node to NULL
+getaddrinfo(NULL, PORT, hints, &results);  //Server sets node to NULL
 //client: getaddrinfo(“149.89.150.100”, “9845”, hints, &results);
   
 //create socket

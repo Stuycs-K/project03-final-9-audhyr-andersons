@@ -38,6 +38,7 @@ char* name(int value){
     
     
 }
+
 void printcard(struct card* beg){
     printf("%s of %s\n", name(beg->value), beg->shape);
     //printf("hi\n");
@@ -55,7 +56,13 @@ void printnice(struct card * beg){
     }
     
 }
-
+struct card * splitdeck(struct card* original, struct card* newdeck){
+    while(original->next != NULL){
+       newdeck = addAtEnd(newdeck,topcard(&original));
+       original =original->next;
+    }
+    return newdeck;
+}
 // Generates a full deck
 struct card* genDeck(){
     char *buff[4] = {"Hearts", "Clubs", "Diamonds", "Spades"};
