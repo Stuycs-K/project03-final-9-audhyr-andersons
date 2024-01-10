@@ -56,3 +56,6 @@ a function to save the game.
 (spent a few hours before class) I worked on saveGame and loadGame. Save game seems to work fully, loadGame loads in the cards and successfully loads one of the decks, but has a bus error when I try loading the other one (with the exact same code). I also moved the random seed to main to improve shuffling. I also modified addAtEnd, printDeck, printNice, deckSize to handle malloc'd but still empty decks.
 
 In class I spent the entire period working on loadGame, and now loadGame and saveGame both fully work.
+
+### 2024-01-10 - Brief description
+We collaboratively worked on debugging splitdeck() and planned out interface stuff a bit. I started working on client.c
