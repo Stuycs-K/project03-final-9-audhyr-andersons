@@ -1,5 +1,10 @@
 #include "game.h"
 #include "networking.h"
+char* structtostring(struct card * cards, char* buffer){
+ 
+  sprintf(buffer, "%d %s", cards->value, cards->shape);
+  return buffer;
+}
 int gaming(){
   int listeningsociket = server_setup();
   int clientd= server_tcp_handshake(listeningsociket);
@@ -29,7 +34,10 @@ int val=0;
        //printnice(deck3);
        struct card* temp = deck3;
        for(int i =0; i< 3; i++){
-        write(clientd, temp, 24);
+        char buff[24];//="hi from server";
+    //write(clientd, buff, 20);
+    
+        write(clientd, structtostring(temp, buff), 24);
         temp = temp->next;
        }//segfaulting
     }

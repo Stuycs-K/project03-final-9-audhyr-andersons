@@ -1,5 +1,12 @@
 #include "networking.h"
 #include "game.h"
+struct card * stringtostruct(char* string){
+    int value;
+    char* shape;
+    sscanf(string, "%d %s", &value, shape);
+    return newcard(value, shape);
+
+}
 int resOrNew(){
     
     
@@ -26,15 +33,20 @@ int resOrNew(){
 int main(int argc, char*argv[]){
     int serverd= client_tcp_handshake("127.0.0.1");
     int c = resOrNew();
-    struct card * top;
-    read(serverd,top, 24);
+    struct card * top=NULL;
+    char buff[24];
+    //read(serverd, buff, 20);
+    //printf("%s\n", buff);
+    read(serverd,buff, 24);
+    top = stringtostruct(buff);
+
     struct card * temp;
     //segfaulting here
-    read(serverd,temp, 24);
-    //top=addAtEnd(top, temp);
+    read(serverd,buff, 24);
+    top=addAtEnd(top, stringtostruct(buff));
     //printf("hi\n");
-    read(serverd,temp, 24);
-    //addAtEnd(top, temp);
-    //printnice(top);
+    read(serverd,buff, 24);
+    addAtEnd(top, stringtostruct(buff));
+    printnice(top);
     return  0;
 }
