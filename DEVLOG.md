@@ -37,6 +37,10 @@ Fixed splitdeck function
 Started sending data between client and server to make game work between terminals and computers
 
 Worked on reading and writing structs between the server and the client
+
+### 2024-01-11 - Brief description
+Added functions to make the game work on the server side
+Continued testing networking and cleaning up the client
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
