@@ -2,7 +2,7 @@
 #include "networking.h"
 int gaming(){
   int listeningsociket = server_setup();
-  //int clientd= server_tcp_handshake(listeningsociket);
+  int clientd= server_tcp_handshake(listeningsociket);
 int val=0;
     char buff [100];
     printf("Start a new game or resume old one:(1/2) "); 
@@ -31,7 +31,7 @@ int val=0;
        for(int i =0; i< 3; i++){
         write(clientd, temp, 24);
         temp = temp->next;
-       }
+       }//segfaulting
     }
     else if(buff[0]=='2'){
       printf("Add resuming code here\n");
