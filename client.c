@@ -7,6 +7,13 @@ struct card * stringtostruct(char* string){
     return newcard(value, shape);
 
 }
+struct card *readcards(int serverd, struct card * deck){
+    for(int i = 0; i<3; i++){
+        char buff[24];
+        read(serverd,buff, 24);
+        addAtEnd(deck, stringtostruct(buff));
+    }
+}
 int resOrNew(){
     
     
@@ -34,19 +41,20 @@ int main(int argc, char*argv[]){
     int serverd= client_tcp_handshake("127.0.0.1");
     int c = resOrNew();
     struct card * top=NULL;
-    char buff[24];
+    //char buff[24];
+    top =readcards(serverd,top);
     //read(serverd, buff, 20);
     //printf("%s\n", buff);
-    read(serverd,buff, 24);
-    top = stringtostruct(buff);
+    // read(serverd,buff, 24);
+    // top = stringtostruct(buff);
 
-    struct card * temp;
-    //segfaulting here
-    read(serverd,buff, 24);
-    top=addAtEnd(top, stringtostruct(buff));
-    //printf("hi\n");
-    read(serverd,buff, 24);
-    addAtEnd(top, stringtostruct(buff));
-    printnice(top);
+    // struct card * temp;
+    // //segfaulting here
+    // read(serverd,buff, 24);
+    // top=addAtEnd(top, stringtostruct(buff));
+    // //printf("hi\n");
+    // read(serverd,buff, 24);
+    // addAtEnd(top, stringtostruct(buff));
+     printnice(top);
     return  0;
 }
