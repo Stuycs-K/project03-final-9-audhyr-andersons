@@ -35,6 +35,8 @@ I added a splitdeck function, still not completely working(segfaulting)
 ### 2024-01-10 - Brief description
 Fixed splitdeck function
 Started sending data between client and server to make game work between terminals and computers
+
+Worked on reading and writing structs between the server and the client
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
