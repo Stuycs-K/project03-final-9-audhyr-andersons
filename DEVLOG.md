@@ -29,6 +29,12 @@ I started making a function to recursively call and handle war in case it happen
 
 ### 2024-01-09 - Brief description
 Added networking code and started on server logic for prompting user and making the game work.
+For hw I continued working on networking code and adjusting it for war.
+I added a splitdeck function, still not completely working(segfaulting)
+
+### 2024-01-10 - Brief description
+Fixed splitdeck function
+Started sending data between client and server to make game work between terminals and computers
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description

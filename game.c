@@ -38,6 +38,7 @@ char* name(int value){
     
     
 }
+
 void printcard(struct card* beg){
     printf("%s of %s\n", name(beg->value), beg->shape);
     //printf("hi\n");
@@ -55,7 +56,34 @@ void printnice(struct card * beg){
     }
     
 }
-
+//not currently working, the original deck stays the same
+struct card * splitdeck(struct card** original, struct card** newdeck){
+    struct card * temp= *original;
+    while((*original)->next != NULL){
+       *newdeck = addAtEnd(*newdeck,topcard(original));
+       
+       *original =(*original)->next;
+       if(*original==NULL){
+        break;
+       }
+       
+    }
+    *original = temp;
+    return *newdeck;
+}
+struct card * splitdeck2(struct card* original, struct card* newdeck){
+    struct card * temp= original;
+    while(temp->next != NULL){
+        temp =temp->next;
+       newdeck = addAtEnd(newdeck,topcard(&temp));
+       
+       
+       if(temp==NULL){
+        break;
+       }
+    }
+    return newdeck;
+}
 // Generates a full deck
 struct card* genDeck(){
     char *buff[4] = {"Hearts", "Clubs", "Diamonds", "Spades"};
