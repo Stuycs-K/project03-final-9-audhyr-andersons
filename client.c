@@ -38,7 +38,8 @@ int resOrNew(){
 }
 
 int main(int argc, char*argv[]){
-    int serverd= client_tcp_handshake("127.0.0.1");
+    //int serverd= client_tcp_handshake("127.0.0.1");
+    int serverd= client_tcp_handshake("149.89.150.126");//149.89.150.126
     int c = resOrNew();
     struct card * top=NULL;
     //char buff[24];

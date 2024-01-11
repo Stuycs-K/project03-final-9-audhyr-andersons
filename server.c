@@ -20,8 +20,8 @@ int playgame(int clientd, struct card * serv, struct card * clie){
 
 }
 int gaming(){
-  int listeningsociket = server_setup();
-  int clientd= server_tcp_handshake(listeningsociket);
+  int listeningsocket = server_setup();
+  int clientd= server_tcp_handshake(listeningsocket);
 int val=0;
     char buff [100];
   //add code to take input from client to either resume or start new game
