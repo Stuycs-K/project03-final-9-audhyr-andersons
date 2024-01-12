@@ -57,19 +57,20 @@ void printnice(struct card * beg){
     
 }
 //not currently working, the original deck stays the same
-struct card * splitdeck(struct card** original, struct card** newdeck){
-    struct card * temp= *original;
-    while((*original)->next != NULL){
-       *newdeck = addAtEnd(*newdeck,topcard(original));
+struct card * splitdeck(struct card* original, struct card* newdeck){
+    struct card * temp= original;
+    while(temp->next != NULL){
        
-       *original =(*original)->next;
-       if(*original==NULL){
+       newdeck = addAtEnd(newdeck,topcard(&temp));
+       
+       
+       if(temp==NULL){
         break;
        }
-       
+       temp =temp->next;
+        
     }
-    *original = temp;
-    return *newdeck;
+    return newdeck;
 }
 struct card * splitdeck2(struct card* original, struct card* newdeck){
     struct card * temp= original;

@@ -8,11 +8,19 @@ struct card * stringtostruct(char* string){
 
 }
 struct card *readcards(int serverd, struct card * deck){
+<<<<<<< HEAD
+=======
+    //struct card* temp = deck;
+>>>>>>> main
     for(int i = 0; i<3; i++){
         char buff[24];
         read(serverd,buff, 24);
         addAtEnd(deck, stringtostruct(buff));
     }
+<<<<<<< HEAD
+=======
+    return deck;
+>>>>>>> main
 }
 int resOrNew(){
     
@@ -38,12 +46,45 @@ int resOrNew(){
 }
 
 int main(int argc, char*argv[]){
-    //int serverd= client_tcp_handshake("127.0.0.1");
-    int serverd= client_tcp_handshake("149.89.150.126");//149.89.150.126
+    char *ipbuff = malloc(sizeof(char)*30);
+    printf("Please enter ip of server: ");
+    fgets(ipbuff, sizeof(char)*30, stdin);
+    //strsep(&ipbuff, "\3");
+    if(ipbuff[strlen(ipbuff)-1] == '\n') ipbuff[strlen(ipbuff)-1] = '\0';
+    //printf("entered ip: |%s|", ipbuff);
+    int serverd= client_tcp_handshake(ipbuff);
+    printf("connected!\n");
+
     int c = resOrNew();
-    struct card * top=NULL;
-    //char buff[24];
-    top =readcards(serverd,top);
+    write(serverd, &c, sizeof(int));
+    struct card* deck;
+    char buff[100];
+    // while(1){
+    //     deck =readcards(serverd,deck );
+    //     printnice(deck);
+    //     printf("Please enter which card to pick(1-3): ");
+    //     fgets(buff, sizeof(buff), stdin);
+    //     int choice = 0;
+    // choice = buff[0] - 48;
+    //     if(strlen(buff) != 2){
+    //     printf("%ld\n", strlen(buff));
+    //     printf("Invalid Input!\n");
+    //     //return resOrNew();
+    // }
+
+    
+    // else if(choice != 1 && choice != 2 && choice !=3){
+    //     printf("%d\n", choice);
+    //     printf("Invalid Input!\n");
+    //     //return resOrNew();
+    // }
+    // else{
+    //     write(serverd, &choice, 4);
+    // }
+    
+    }
+    // struct card * top=NULL;
+    // char buff[24];
     //read(serverd, buff, 20);
     //printf("%s\n", buff);
     // read(serverd,buff, 24);
@@ -56,6 +97,21 @@ int main(int argc, char*argv[]){
     // //printf("hi\n");
     // read(serverd,buff, 24);
     // addAtEnd(top, stringtostruct(buff));
+<<<<<<< HEAD
      printnice(top);
+=======
+    // printnice(top);
+    
+    // struct card * top;
+    // read(serverd,top, 24);
+    // struct card * temp;
+    // //segfaulting here
+    // read(serverd,temp, 24);
+    // //top=addAtEnd(top, temp);
+    // //printf("hi\n");
+    // read(serverd,temp, 24);
+    // //addAtEnd(top, temp);
+    // //printnice(top);
+>>>>>>> main
     return  0;
 }
