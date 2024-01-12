@@ -24,5 +24,5 @@ test: tests
 	@./tests
 
 clean:
-	@rm -f *.o tests
+	@rm -f *.o tests server client
 

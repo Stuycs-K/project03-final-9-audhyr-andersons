@@ -5,15 +5,15 @@ char* structtostring(struct card * cards, char* buffer){
   sprintf(buffer, "%d %s", cards->value, cards->shape);
   return buffer;
 }
-int playgame(int clientd, struct card * serv, struct card * clie){
+int playgame(int clientd, struct card ** serv, struct card ** clie){
   srand(time(NULL));
-    while((deckSize(serv)!=0) || (deckSize(clie)!=0) ){
+    while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
       for(int i =0;i<3;i++){
         ////printf("HI3\n");
         char buff[24];
-        write(clientd, structtostring(clie, buff), 24);
-        clie = clie->next;
+        write(clientd, structtostring(*clie, buff), 24);
+        *clie = (*clie)->next;
       }
       read(clientd, &choice, sizeof(choice));
       //printf("HI1\n");
@@ -115,8 +115,9 @@ int playgame(int clientd, struct card * serv, struct card * clie){
 // }
 int main(int argc, char*argv[]){
   int listeningsocket = server_setup();
-  int clientd = server_tcp_handshake(listeningsocket);
 
+  while(1){
+  int clientd = server_tcp_handshake(listeningsocket);
   int choice = 8;
   read(clientd, &choice, sizeof(int));
   printf("Client's Choice: %d\n", choice);
@@ -137,6 +138,9 @@ int main(int argc, char*argv[]){
 // printf("\n--------\n");
 //       printnice(deck3);
 //       printf("\n--------\n");
-    playgame(clientd,deck2,deck3);
+    playgame(clientd,&deck2,&deck3);
+
+  close(clientd);
+  }
   return 0;
 }
