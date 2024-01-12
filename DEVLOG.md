@@ -71,3 +71,8 @@ In class I spent the entire period working on loadGame, and now loadGame and sav
 
 ### 2024-01-10 - Brief description
 We collaboratively worked on debugging splitdeck() and planned out interface stuff a bit. I started working on client.c
+
+### 2024-01-11 - Brief description
+Made sure networking was fully working (tiny change). Started working on interaction between server and client. Client takes input for server ip,
+connects to the server, and sends over a choice.
+
