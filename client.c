@@ -7,17 +7,17 @@ struct card * stringtostruct(char* string){
     return newcard(value, shape);
 
 }
-struct card *readcards(int serverd, struct card * deck){
+struct card *readcards(int serverd, struct card ** deck){
     //struct card* temp = deck;
     for(int i = 0; i<3; i++){
         
         char buff[24];
         read(serverd,buff, 24);
         
-        deck =addAtEnd(deck, stringtostruct(buff));
+        *deck =addAtEnd(*deck, stringtostruct(buff));
     }
     
-    return deck;
+    return *deck;
 }
 int resOrNew(){
     
@@ -59,7 +59,7 @@ int main(int argc, char*argv[]){
     //readcards(serverd, deck);
     while(1){
         deck=NULL;
-        deck =readcards(serverd,deck );
+        deck =readcards(serverd,&deck );
         printnice(deck);
         printf("Please enter which card to pick(1-3): ");
         fgets(buff, sizeof(buff), stdin);

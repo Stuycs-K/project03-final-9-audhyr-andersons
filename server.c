@@ -5,18 +5,21 @@ char* structtostring(struct card * cards, char* buffer){
   sprintf(buffer, "%d %s", cards->value, cards->shape);
   return buffer;
 }
-int playgame(int clientd, struct card * serv, struct card * clie){
+int playgame(int clientd, struct card ** serv, struct card ** clie){
   srand(time(NULL));
-    while((deckSize(serv)!=0) || (deckSize(clie)!=0) ){
+   //struct card * top = *clie;
+   char buff[24];
+    while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
+     //*clie =top;
       for(int i =0;i<3;i++){
-        ////printf("HI3\n");
-        char buff[24];
-        write(clientd, structtostring(clie, buff), 24);
-        clie = clie->next;
+        
+        write(clientd, structtostring(*clie, buff), 24);
+        *clie = (*clie)->next;
       }
+
       read(clientd, &choice, sizeof(choice));
-      //printf("HI1\n");
+      printnice(*clie);//printf("HI1\n");
       games(serv, 1,clie, choice);
       //printf("HI2\n");
       
@@ -137,6 +140,6 @@ int main(int argc, char*argv[]){
 // printf("\n--------\n");
 //       printnice(deck3);
 //       printf("\n--------\n");
-    playgame(clientd,deck2,deck3);
+    playgame(clientd,&deck2,&deck3);
   return 0;
 }
