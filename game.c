@@ -46,7 +46,7 @@ void printcard(struct card* beg){
 
 void printnice(struct card * beg){
     if(beg==NULL || beg->value == 0){
-        printf("Empty Deck"
+        printf("Empty Deck\n"
         );
     }
     while(beg!=NULL){
@@ -56,7 +56,20 @@ void printnice(struct card * beg){
     }
     
 }
-//not currently working, the original deck stays the same and now it's segfaulting
+
+// Splits a deck in half and returns the removed-half
+struct card* splitdeck3(struct card** deck){
+    struct card* new = NULL;
+    struct card* pholder = (*deck);
+    deck = &((*deck)->next);
+    while(*deck != NULL){
+        new = addAtEnd(new, topcard(deck));
+        if(*deck != NULL) deck = &((*deck)->next);
+    }
+    deck = &pholder;
+    return new;
+}
+//not currently working, the original deck stays the same
 struct card * splitdeck(struct card* original, struct card* newdeck){
     struct card * temp= original;
     while(temp->next != NULL){
@@ -185,32 +198,32 @@ int war(struct card * pile, struct card * p1, struct card * p2){
     
 }
 // Server plays the game and sends the content required to play to the client
-int games(struct card * p1, int c1, struct card* p2, int c2){
-    struct card * temp1=p1;
-    if(c1 >1){
-        for(int num =1; num < c1; num++ ){
-            temp1=temp1->next;
-        }
-    }
-    struct card * temp2=p2;
-    if(c2 >1){
-        for(int num =1; num < c2; num++ ){
-            temp2=temp2->next;
-        }
-    }
+int games(struct card ** p1, int c1, struct card** p2, int c2){
+    // struct card * temp1=p1;
+    // if(c1 >1){
+    //     for(int num =1; num < c1; num++ ){
+    //         temp1=temp1->next;
+    //     }
+    // }
+    // struct card * temp2=p2;
+    // if(c2 >1){
+    //     for(int num =1; num < c2; num++ ){
+    //         temp2=temp2->next;
+    //     }
+    // }
     
     struct card * pile=NULL;
     
     //pile =addAtEnd(pile, removeindex(p1,c1));
     //pile =addAtEnd(pile, removeindex(p2,c2));
-     pile =addAtEnd(pile, topcard(&p1));
-     pile =addAtEnd(pile, topcard(&p2));
-    printf("is it here?\n");
+     pile =addAtEnd(pile, topcard(p1));
+     pile =addAtEnd(pile, topcard(p2));
+    //printf("is it here?\n");
 
-    printnice(pile);
+    //printnice(pile);
     if(pile->value > (pile->next)->value){
         while(pile!=NULL){
-            addAtEnd(p1,topcard(&pile));
+            addAtEnd(*p1,topcard(&pile));
             
          
         }
@@ -220,13 +233,13 @@ int games(struct card * p1, int c1, struct card* p2, int c2){
 
         while(pile!=NULL){
             
-            addAtEnd(p2,topcard(&pile));
+            addAtEnd(*p2,topcard(&pile));
            
             
         }
     }
     else if(pile->value == (pile->next)->value){
-        war( pile,  p1,  p2);
+        war( pile,  *p1,  *p2);
         
         
         //technically could have infinite wars

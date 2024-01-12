@@ -77,3 +77,6 @@ We collaboratively worked on debugging splitdeck() and planned out interface stu
 Made sure networking was fully working (tiny change). Started working on interaction between server and client. Client takes input for server ip,
 connects to the server, and sends over a choice.
 
+### 2024-01-12 - Brief description
+New & improved implementation of split deck! Also fixed games, and correspondingly adjusted playgames (still has a few unrelated issues to debug). Also added a bit to makefile clean.
+
