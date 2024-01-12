@@ -152,14 +152,14 @@ struct card * removeindex(struct card * deck, int index){
     return deck;
 
 }
-int war(struct card * pile, struct card * p1, struct card * p2){
+int war(struct card ** pile, struct card ** p1, struct card ** p2){
 //continue function
-        struct card * temp1=p1;
-        struct card * temp2=p2;
-        struct card* temp3=pile;
+        struct card * temp1=*p1;
+        struct card * temp2=*p2;
+        struct card* temp3=*pile;
         for(int i =0;i<3; i++){
-            pile =addAtEnd(pile,topcard(&p1));
-            pile =addAtEnd(pile,topcard(&p2));
+            *pile =addAtEnd(*pile,topcard(p1));
+            *pile =addAtEnd(*pile,topcard(p2));
         }
         struct card* prev;
         while(temp3->next!=NULL){
@@ -172,12 +172,12 @@ int war(struct card * pile, struct card * p1, struct card * p2){
         }
         if(prev->value > temp3->value){
             while(pile!=NULL){
-                addAtEnd(p1,topcard(&pile));
+                addAtEnd(*p1,topcard(pile));
             }
         }
         if(prev->value < temp3->value){
             while(pile!=NULL){
-                addAtEnd(p2,topcard(&pile));
+                addAtEnd(*p2,topcard(pile));
             }
         }
         return 1;
@@ -186,18 +186,18 @@ int war(struct card * pile, struct card * p1, struct card * p2){
 }
 // Server plays the game and sends the content required to play to the client
 int games(struct card * p1, int c1, struct card* p2, int c2){
-    struct card * temp1=p1;
-    if(c1 >1){
-        for(int num =1; num < c1; num++ ){
-            temp1=temp1->next;
-        }
-    }
-    struct card * temp2=p2;
-    if(c2 >1){
-        for(int num =1; num < c2; num++ ){
-            temp2=temp2->next;
-        }
-    }
+    // struct card * temp1=p1;
+    // if(c1 >1){
+    //     for(int num =1; num < c1; num++ ){
+    //         temp1=temp1->next;
+    //     }
+    // }
+    // struct card * temp2=p2;
+    // if(c2 >1){
+    //     for(int num =1; num < c2; num++ ){
+    //         temp2=temp2->next;
+    //     }
+    // }
     
     struct card * pile=NULL;
     
@@ -205,19 +205,19 @@ int games(struct card * p1, int c1, struct card* p2, int c2){
     //pile =addAtEnd(pile, removeindex(p2,c2));
      pile =addAtEnd(pile, topcard(&p1));
      pile =addAtEnd(pile, topcard(&p2));
-    printf("is it here?\n");
-
+    //printf("is it here?\n");
+    //Send the pile to the client as well
     printnice(pile);
     if(pile->value > (pile->next)->value){
         while(pile!=NULL){
             addAtEnd(p1,topcard(&pile));
-            
+            //server won
          
         }
     }
     else if(pile->value < (pile->next)->value){
         
-
+            //client won, send cards to end of client pile
         while(pile!=NULL){
             
             addAtEnd(p2,topcard(&pile));

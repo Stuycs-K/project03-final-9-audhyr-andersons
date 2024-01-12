@@ -18,7 +18,7 @@ int playgame(int clientd, struct card * serv, struct card * clie){
       read(clientd, &choice, sizeof(choice));
       //printf("HI1\n");
       games(serv, 1,clie, choice);
-      printf("HI2\n");
+      //printf("HI2\n");
       
     }
 
