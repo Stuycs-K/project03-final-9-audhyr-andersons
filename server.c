@@ -141,11 +141,8 @@ int main(int argc, char*argv[]){
 //       printnice(deck3);
 //       printf("\n--------\n");
     playgame(clientd,&deck2,&deck3);
-<<<<<<< HEAD
-=======
 
   close(clientd);
   }
->>>>>>> main
   return 0;
 }
