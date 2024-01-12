@@ -121,11 +121,11 @@ int main(int argc, char*argv[]){
       struct card * deck3;
     if(choice ==1){
       
-      for(int i = 0; i < 15; i++){
-        deck=shuffleDeck(deck);
-      }
-      deck2=splitdeck(deck, deck2);
-    }
+    //   for(int i = 0; i < 15; i++){
+    //     deck=shuffleDeck(deck);
+    //   }
+    //   deck2=splitdeck(deck, deck2);
+    // }
       //deck3=splitdeck2(deck,deck3);}
       
     //playgame(clientd,deck2,deck3);
