@@ -56,28 +56,31 @@ void printnice(struct card * beg){
     }
     
 }
-//not currently working, the original deck stays the same
-struct card * splitdeck(struct card** original, struct card** newdeck){
-    struct card * temp= *original;
-    while((*original)->next != NULL){
-       *newdeck = addAtEnd(*newdeck,topcard(original));
+//not currently working, the original deck stays the same and now it's segfaulting
+struct card * splitdeck(struct card* original, struct card* newdeck){
+    struct card * temp= original;
+    while(temp->next != NULL){
        
-       *original =(*original)->next;
-       if(*original==NULL){
+       newdeck = addAtEnd(newdeck,topcard(&temp));
+       
+       
+       
+       temp =temp->next;
+        if(temp==NULL){
         break;
        }
-       
     }
-    *original = temp;
-    return *newdeck;
+    return newdeck;
 }
 struct card * splitdeck2(struct card* original, struct card* newdeck){
     struct card * temp= original;
     while(temp->next != NULL){
         temp =temp->next;
+       
+       
+       
+       
        newdeck = addAtEnd(newdeck,topcard(&temp));
-       
-       
        if(temp==NULL){
         break;
        }
@@ -136,8 +139,11 @@ int deckSize(struct card* deck){
     return size;}
     
 struct card * removeindex(struct card * deck, int index){
-    struct card * prev;
-    for(int i =1;i<index;i++){
+    struct card * prev=deck;
+    if(index ==1){
+        return topcard(&deck);
+    }
+        for(int i =1;i<index;i++){
         prev = deck;
         deck=deck->next;
     }
@@ -192,12 +198,15 @@ int games(struct card * p1, int c1, struct card* p2, int c2){
             temp2=temp2->next;
         }
     }
-    struct card * pile;
     
-    pile =addAtEnd(pile, removeindex(p1,c1));
-    pile =addAtEnd(pile, removeindex(p2,c2));
-    // pile =addAtEnd(pile, topcard(&p1));
-    // pile =addAtEnd(pile, topcard(&p2));
+    struct card * pile=NULL;
+    
+    //pile =addAtEnd(pile, removeindex(p1,c1));
+    //pile =addAtEnd(pile, removeindex(p2,c2));
+     pile =addAtEnd(pile, topcard(&p1));
+     pile =addAtEnd(pile, topcard(&p2));
+    printf("is it here?\n");
+
     printnice(pile);
     if(pile->value > (pile->next)->value){
         while(pile!=NULL){
