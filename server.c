@@ -9,6 +9,7 @@ int playgame(int clientd, struct card * serv, struct card * clie){
   srand(time(NULL));
     while((deckSize(serv)!=0) || (deckSize(clie)!=0) ){
       int choice;
+      struct card * top = clie;
       for(int i =0;i<3;i++){
         ////printf("HI3\n");
         char buff[24];
@@ -17,7 +18,7 @@ int playgame(int clientd, struct card * serv, struct card * clie){
       }
       read(clientd, &choice, sizeof(choice));
       //printf("HI1\n");
-      games(serv, 1,clie, choice);
+      games(serv, 1,top, choice);
       printf("HI2\n");
       
     }
