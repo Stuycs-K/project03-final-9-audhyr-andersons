@@ -31,22 +31,41 @@ int resOrNew(){
 }
 
 int main(int argc, char*argv[]){
-    int serverd= client_tcp_handshake("127.0.0.1");
+    char *ipbuff = malloc(sizeof(char)*30);
+    printf("Please enter ip of server: ");
+    fgets(ipbuff, sizeof(char)*30, stdin);
+    //strsep(&ipbuff, "\3");
+    if(ipbuff[strlen(ipbuff)-1] == '\n') ipbuff[strlen(ipbuff)-1] = '\0';
+    //printf("entered ip: |%s|", ipbuff);
+    int serverd= client_tcp_handshake(ipbuff);
+    printf("connected!\n");
+
     int c = resOrNew();
     struct card * top=NULL;
     char buff[24];
     //read(serverd, buff, 20);
     //printf("%s\n", buff);
-    read(serverd,buff, 24);
-    top = stringtostruct(buff);
+    // read(serverd,buff, 24);
+    // top = stringtostruct(buff);
 
-    struct card * temp;
-    //segfaulting here
-    read(serverd,buff, 24);
-    top=addAtEnd(top, stringtostruct(buff));
-    //printf("hi\n");
-    read(serverd,buff, 24);
-    addAtEnd(top, stringtostruct(buff));
-    printnice(top);
+    // struct card * temp;
+    // //segfaulting here
+    // read(serverd,buff, 24);
+    // top=addAtEnd(top, stringtostruct(buff));
+    // //printf("hi\n");
+    // read(serverd,buff, 24);
+    // addAtEnd(top, stringtostruct(buff));
+    // printnice(top);
+    write(serverd, &c, sizeof(int));
+    // struct card * top;
+    // read(serverd,top, 24);
+    // struct card * temp;
+    // //segfaulting here
+    // read(serverd,temp, 24);
+    // //top=addAtEnd(top, temp);
+    // //printf("hi\n");
+    // read(serverd,temp, 24);
+    // //addAtEnd(top, temp);
+    // //printnice(top);
     return  0;
 }

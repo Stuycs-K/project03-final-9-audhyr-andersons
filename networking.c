@@ -37,6 +37,9 @@ int status=connect(sd, results->ai_addr, results->ai_addrlen);
    }    
 //printf("%d\n",status);
 
+  free(hints);
+  freeaddrinfo(results);
+
   return sd;
 }
 
@@ -45,7 +48,7 @@ int status=connect(sd, results->ai_addr, results->ai_addrlen);
  *blocks until connection is made.
  */
 int server_tcp_handshake(int listen_socket){
-    char buffer[128];
+    //char buffer[128];
     int client_socket;
 socklen_t sock_size;
 struct sockaddr_storage client_address;
