@@ -46,7 +46,7 @@ void printcard(struct card* beg){
 
 void printnice(struct card * beg){
     if(beg==NULL || beg->value == 0){
-        printf("Empty Deck"
+        printf("Empty Deck\n"
         );
     }
     while(beg!=NULL){
@@ -56,7 +56,20 @@ void printnice(struct card * beg){
     }
     
 }
-//not currently working, the original deck stays the same and now it's segfaulting
+
+// Splits a deck in half and returns the removed-half
+struct card* splitdeck3(struct card** deck){
+    struct card* new = NULL;
+    struct card* pholder = (*deck);
+    deck = &((*deck)->next);
+    while(*deck != NULL){
+        new = addAtEnd(new, topcard(deck));
+        if(*deck != NULL) deck = &((*deck)->next);
+    }
+    deck = &pholder;
+    return new;
+}
+//not currently working, the original deck stays the same
 struct card * splitdeck(struct card* original, struct card* newdeck){
     struct card * temp= original;
     while(temp->next != NULL){
