@@ -36,4 +36,5 @@ void saveGame(char* player, struct card* pDeck, struct card* sDeck);
 struct card * splitdeck(struct card* original, struct card* newdeck);
 void loadGame(char* player, struct card** pDeck, struct card** sDeck);
 struct card * splitdeck2(struct card* original, struct card* newdeck);
+struct card* splitdeck3(struct card** source);
 #endif
