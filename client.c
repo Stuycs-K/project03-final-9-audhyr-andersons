@@ -7,6 +7,15 @@ struct card * stringtostruct(char* string){
     return newcard(value, shape);
 
 }
+struct card *readcards(int serverd, struct card * deck){
+    //struct card* temp = deck;
+    for(int i = 0; i<3; i++){
+        char buff[24];
+        read(serverd,buff, 24);
+        addAtEnd(deck, stringtostruct(buff));
+    }
+    return deck;
+}
 int resOrNew(){
     
     
@@ -41,8 +50,35 @@ int main(int argc, char*argv[]){
     printf("connected!\n");
 
     int c = resOrNew();
-    struct card * top=NULL;
-    char buff[24];
+    write(serverd, &c, sizeof(int));
+    struct card* deck;
+    char buff[100];
+    while(1){
+        deck =readcards(serverd,deck );
+        printnice(deck);
+        printf("Please enter which card to pick(1-3): ");
+        fgets(buff, sizeof(buff), stdin);
+        int choice = 0;
+    choice = buff[0] - 48;
+        if(strlen(buff) != 2){
+        printf("%ld\n", strlen(buff));
+        printf("Invalid Input!\n");
+        //return resOrNew();
+    }
+
+    
+    else if(choice != 1 && choice != 2 && choice !=3){
+        printf("%d\n", choice);
+        printf("Invalid Input!\n");
+        //return resOrNew();
+    }
+    else{
+        write(serverd, &choice, 4);
+    }
+    
+    }
+    // struct card * top=NULL;
+    // char buff[24];
     //read(serverd, buff, 20);
     //printf("%s\n", buff);
     // read(serverd,buff, 24);
@@ -56,7 +92,7 @@ int main(int argc, char*argv[]){
     // read(serverd,buff, 24);
     // addAtEnd(top, stringtostruct(buff));
     // printnice(top);
-    write(serverd, &c, sizeof(int));
+    
     // struct card * top;
     // read(serverd,top, 24);
     // struct card * temp;
