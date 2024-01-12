@@ -29,11 +29,12 @@ struct card* shuffleDeck(struct card* deck);
 struct card* topcard(struct card**deck);
 void printnice(struct card * beg);
 int deckSize(struct card * deck);
-int games(struct card * p1, int c1, struct card* p2, int c2);
+int games(struct card ** p1, int c1, struct card** p2, int c2);
 int war(struct card * pile, struct card * p1, struct card * p2);
 struct card * removeindex(struct card * deck, int index);
 void saveGame(char* player, struct card* pDeck, struct card* sDeck);
 struct card * splitdeck(struct card* original, struct card* newdeck);
 void loadGame(char* player, struct card** pDeck, struct card** sDeck);
 struct card * splitdeck2(struct card* original, struct card* newdeck);
+struct card* splitdeck3(struct card** source);
 #endif
