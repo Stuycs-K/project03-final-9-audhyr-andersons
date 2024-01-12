@@ -9,13 +9,17 @@ int playgame(int clientd, struct card * serv, struct card * clie){
   srand(time(NULL));
     while((deckSize(serv)!=0) || (deckSize(clie)!=0) ){
       int choice;
-      read(clientd, &choice, sizeof(choice));
-      games(serv, rand()%3+1,clie, choice);
       for(int i =0;i<3;i++){
+        ////printf("HI3\n");
         char buff[24];
         write(clientd, structtostring(clie, buff), 24);
         clie = clie->next;
       }
+      read(clientd, &choice, sizeof(choice));
+      //printf("HI1\n");
+      games(serv, 1,clie, choice);
+      printf("HI2\n");
+      
     }
 
 }
@@ -124,10 +128,15 @@ int main(int argc, char*argv[]){
       for(int i = 0; i < 15; i++){
         deck=shuffleDeck(deck);
       }
-      //deck2=splitdeck(deck, deck2);
+      deck2=splitdeck(deck, deck2);
     // }
-      //deck3=splitdeck2(deck,deck3);
-      
-    //playgame(clientd,deck2,deck3);
+      deck3=splitdeck2(deck,deck3);
+//       printnice(deck);
+//       printf("\n--------\n");
+//       printnice(deck2);
+// printf("\n--------\n");
+//       printnice(deck3);
+//       printf("\n--------\n");
+    playgame(clientd,deck2,deck3);
   return 0;
 }
