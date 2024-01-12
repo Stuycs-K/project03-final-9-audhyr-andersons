@@ -8,19 +8,13 @@ struct card * stringtostruct(char* string){
 
 }
 struct card *readcards(int serverd, struct card * deck){
-<<<<<<< HEAD
-=======
     //struct card* temp = deck;
->>>>>>> main
     for(int i = 0; i<3; i++){
         char buff[24];
         read(serverd,buff, 24);
         addAtEnd(deck, stringtostruct(buff));
     }
-<<<<<<< HEAD
-=======
     return deck;
->>>>>>> main
 }
 int resOrNew(){
     
@@ -81,7 +75,7 @@ int main(int argc, char*argv[]){
     // else{
     //     write(serverd, &choice, 4);
     // }
-    
+    return 0;
     }
     // struct card * top=NULL;
     // char buff[24];
@@ -97,9 +91,7 @@ int main(int argc, char*argv[]){
     // //printf("hi\n");
     // read(serverd,buff, 24);
     // addAtEnd(top, stringtostruct(buff));
-<<<<<<< HEAD
-     printnice(top);
-=======
+     //printnice(top);
     // printnice(top);
     
     // struct card * top;
@@ -112,6 +104,3 @@ int main(int argc, char*argv[]){
     // read(serverd,temp, 24);
     // //addAtEnd(top, temp);
     // //printnice(top);
->>>>>>> main
-    return  0;
-}

@@ -117,16 +117,16 @@ int main(int argc, char*argv[]){
   read(clientd, &choice, sizeof(int));
   printf("Client's Choice: %d\n", choice);
   struct card* deck =genDeck();
-      struct card * deck2;
-      struct card * deck3;
+      struct card * deck2=NULL;
+      struct card * deck3=NULL;
     if(choice ==1){}
       
-    //   for(int i = 0; i < 15; i++){
-    //     deck=shuffleDeck(deck);
-    //   }
-    //   deck2=splitdeck(deck, deck2);
+      for(int i = 0; i < 15; i++){
+        deck=shuffleDeck(deck);
+      }
+      //deck2=splitdeck(deck, deck2);
     // }
-      //deck3=splitdeck2(deck,deck3);}
+      //deck3=splitdeck2(deck,deck3);
       
     //playgame(clientd,deck2,deck3);
   return 0;

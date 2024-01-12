@@ -56,7 +56,7 @@ void printnice(struct card * beg){
     }
     
 }
-//not currently working, the original deck stays the same
+//not currently working, the original deck stays the same and now it's segfaulting
 struct card * splitdeck(struct card* original, struct card* newdeck){
     struct card * temp= original;
     while(temp->next != NULL){
@@ -76,12 +76,13 @@ struct card * splitdeck2(struct card* original, struct card* newdeck){
     struct card * temp= original;
     while(temp->next != NULL){
         temp =temp->next;
-       newdeck = addAtEnd(newdeck,topcard(&temp));
+       
        
        
        if(temp==NULL){
         break;
        }
+       newdeck = addAtEnd(newdeck,topcard(&temp));
     }
     return newdeck;
 }
