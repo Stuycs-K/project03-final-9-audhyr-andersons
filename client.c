@@ -13,6 +13,9 @@ struct card *readcards(int serverd, struct card * deck){
         
         char buff[24];
         read(serverd,buff, 24);
+        // printf("card read: ");
+        // printcard(stringtostruct(buff));
+        // printf("-------\n");
         
         deck =addAtEnd(deck, stringtostruct(buff));
     }
@@ -64,7 +67,7 @@ int main(int argc, char*argv[]){
         printf("Please enter which card to pick(1-3): ");
         fgets(buff, sizeof(buff), stdin);
         int choice = 0;
-    choice = buff[0] - 48;
+        choice = buff[0] - 48;
         if(strlen(buff) != 2){
         printf("%ld\n", strlen(buff));
         printf("Invalid Input!\n");
