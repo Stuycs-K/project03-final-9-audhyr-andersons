@@ -174,7 +174,7 @@ struct card * removeindex(struct card ** deck, int index){
 }
 int war(struct card ** pile, struct card ** p1, struct card ** p2){
 //continue function
-        printf("War\n");
+        //printf("War\n");
         struct card * temp1=*p1;
         struct card * temp2=*p2;
         struct card* temp3=*pile;
@@ -191,12 +191,12 @@ int war(struct card ** pile, struct card ** p1, struct card ** p2){
             temp3 = temp3->next;
             
         }
-        printf("\n---------------\n");
-        printnice(*pile);
-        printf("\n---------------\n");
-        printnice(*p1);
-        printf("\n---------------\n");
-        printnice(*p2);
+        // printf("\n---------------\n");
+        // printnice(*pile);
+        // printf("\n---------------\n");
+        // printnice(*p1);
+        // printf("\n---------------\n");
+        // printnice(*p2);
         if((prev->value) == (temp3->value)){
             war(pile, p1,p2);
         }
@@ -224,14 +224,15 @@ int games(int clientd,struct card ** p1, int c1, struct card** p2, int c2){
     
     pile =addAtEnd(pile, removeindex(p1,c1));
     pile =addAtEnd(pile, removeindex(p2,c2));
-    printnice(pile);
+    //printnice(pile);
     struct card * temp = pile;
-    // for(int i = 0; i <2;i++){
-
-    
-    // write(clientd, structtostring(temp,buffer), 100);
-    // temp = temp->next;
-    // }
+    for(int i = 0; i <deckSize(pile);i++){
+        
+    write(clientd, structtostring(temp,buffer), 100);
+   // printf("here2\n");
+    temp = temp->next;
+    //
+    }
     
 
     

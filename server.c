@@ -6,7 +6,7 @@
 //   return buffer;
 // }
 int playgame(int clientd, struct card ** serv, struct card ** clie){
-  srand(time(NULL));
+  
     
     while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
@@ -34,7 +34,7 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
 
 int main(int argc, char*argv[]){
   int listeningsocket = server_setup();
-
+  srand(time(NULL));
   while(1){
     int clientd = server_tcp_handshake(listeningsocket);
     int choice = 8;

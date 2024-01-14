@@ -2,7 +2,7 @@
 #include "game.h"
 struct card * stringtostruct(char* string){
     int value;
-    char shape[10];
+    char shape[15];
     sscanf(string, "%d %s", &value, shape);
     return newcard(value, shape);
 
@@ -82,13 +82,19 @@ int main(int argc, char*argv[]){
         
         int choice =selectcard(deck);
         write(serverd, &choice, 4);
-        // struct card * pile;
-        // for(int i = 0; i <2;i++){
+        struct card * pile=NULL;
+        //
+        printf("Pile:\n");
+        for(int i = 0; i <2;i++){
 
-    
-        // read(serverd, buff, 100);
-        // addAtEnd(pile, stringtostruct(buff));
-        // }
+            //printf("here1?\n");
+        read(serverd, buff, 100);
+        //printf("%s\n", buff);
+        //addAtEnd(pile, stringtostruct(buff));
+        
+        printnice(newcard(stringtostruct(buff)->value, stringtostruct(buff)->shape));
+        }
+        printf("------\n");
         //printnice(pile);
     
         
