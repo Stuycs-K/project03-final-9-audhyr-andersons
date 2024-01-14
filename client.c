@@ -10,11 +10,16 @@ struct card * stringtostruct(char* string){
 struct card *readcards(int serverd, struct card ** deck){
     //struct card* temp = deck;
     for(int i = 0; i<3; i++){
-        
         char buff[24];
-        read(serverd,buff, 24);
-        
-        *deck =addAtEnd(*deck, stringtostruct(buff));
+        struct card * card2;
+        int status =read(serverd,card2, 24);
+        if(status ==0){
+            perror("Reading failed");
+        }
+        //printf("number of bytes read %d", status);
+        //struct card * card2 = stringtostruct(buff);
+        printnice(card2);
+        *deck =addAtEnd(*deck, card2);
     }
     
     return *deck;
@@ -56,15 +61,16 @@ int main(int argc, char*argv[]){
     write(serverd, &c, sizeof(int));
     struct card* deck;
     char buff[100];
-    //readcards(serverd, deck);
+
     while(1){
         deck=NULL;
         deck =readcards(serverd,&deck );
-        printnice(deck);
-        printf("Please enter which card to pick(1-3): ");
+        printnice(deck); 
+        
+         printf("Please enter which card to pick(1-3): ");
         fgets(buff, sizeof(buff), stdin);
-        int choice = 0;
-    choice = buff[0] - 48;
+       int choice = 0;
+     choice = buff[0] - 48;
         if(strlen(buff) != 2){
         printf("%ld\n", strlen(buff));
         printf("Invalid Input!\n");
@@ -85,30 +91,4 @@ int main(int argc, char*argv[]){
     }}
     return 0;
     }
-    // struct card * top=NULL;
-    // char buff[24];
-    //read(serverd, buff, 20);
-    //printf("%s\n", buff);
-    // read(serverd,buff, 24);
-    // top = stringtostruct(buff);
-
-    // struct card * temp;
-    // //segfaulting here
-    // read(serverd,buff, 24);
-    // top=addAtEnd(top, stringtostruct(buff));
-    // //printf("hi\n");
-    // read(serverd,buff, 24);
-    // addAtEnd(top, stringtostruct(buff));
-     //printnice(top);
-    // printnice(top);
     
-    // struct card * top;
-    // read(serverd,top, 24);
-    // struct card * temp;
-    // //segfaulting here
-    // read(serverd,temp, 24);
-    // //top=addAtEnd(top, temp);
-    // //printf("hi\n");
-    // read(serverd,temp, 24);
-    // //addAtEnd(top, temp);
-    // //printnice(top);
