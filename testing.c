@@ -15,7 +15,20 @@
 
 int main(){
    srand(time(NULL));
+   struct card* deck1 = NULL;
+    struct card* deck2 = NULL;
+    
+      deck1 = shuffleDeck(genDeck());
+      deck2 = splitdeck3(&deck1);
+       printf("DeckSize: %d", deckSize(deck1));
+    printnice(deck1);
+   struct card * test = removeindex(&deck1, 2);
+    printf("\n------\n");
+    printf("DeckSize: %d", deckSize(deck1));
+    printnice(deck1);
 
+   printf("removed card test\n");
+   printnice(test);
 
 
 }

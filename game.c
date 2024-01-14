@@ -12,6 +12,7 @@ struct card * newcard(int val, char* shape){
 //If given start of linked list is NULL, just returns the new card
 struct card * addAtEnd(struct card * beg, struct card * new){
     struct card * start = beg;
+    //new->next = NULL;
     if(start == NULL || start->value == 0){
         return new;
     }
@@ -153,16 +154,18 @@ int deckSize(struct card* deck){
     
 struct card * removeindex(struct card ** deck, int index){
     struct card * prev=*deck;
+    struct card * temp = *deck;
     if(index ==1){
         return topcard(deck);
     }
-        for(int i =1;i<index;i++){
-        prev = *deck;
-        *deck=(*deck)->next;
+
+    for(int i =1;i<index;i++){
+        prev = temp;
+        temp=(temp)->next;
     }
-    prev->next = (*deck)->next;
-    (*deck)->next=NULL;
-    return *deck;
+    (prev)->next = (temp)->next;
+    temp->next=NULL;
+    return temp;
 
 }
 int war(struct card ** pile, struct card ** p1, struct card ** p2){
@@ -199,28 +202,15 @@ int war(struct card ** pile, struct card ** p1, struct card ** p2){
 }
 // Server plays the game and sends the content required to play to the client
 int games(struct card ** p1, int c1, struct card** p2, int c2){
-    // struct card * temp1=p1;
-    // if(c1 >1){
-    //     for(int num =1; num < c1; num++ ){
-    //         temp1=temp1->next;
-    //     }
-    // }
-    // struct card * temp2=p2;
-    // if(c2 >1){
-    //     for(int num =1; num < c2; num++ ){
-    //         temp2=temp2->next;
-    //     }
-    // }
+    
     
     struct card * pile=NULL;
     
     pile =addAtEnd(pile, removeindex(p1,c1));
     pile =addAtEnd(pile, removeindex(p2,c2));
-     //pile =addAtEnd(pile, topcard(p1));
-     //pile =addAtEnd(pile, topcard(p2));
-    //printf("is it here?\n");
+    
 
-    //printnice(pile);
+    
     if(pile->value > (pile->next)->value){
         while(pile!=NULL){
             addAtEnd(*p1,topcard(&pile));

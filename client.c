@@ -8,16 +8,17 @@ struct card * stringtostruct(char* string){
 
 }
 struct card *readcards(int serverd, struct card ** deck){
-    //struct card* temp = deck;
+    struct card* temp = *deck;
     for(int i = 0; i<3; i++){
         char buff[24];
         read(serverd,buff, 24);
        
         
         *deck =addAtEnd(*deck, stringtostruct(buff));
+        temp = *deck;
     }
     
-    return *deck;
+    return temp;
 }
 int resOrNew(){
     
