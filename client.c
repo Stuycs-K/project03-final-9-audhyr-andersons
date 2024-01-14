@@ -12,11 +12,9 @@ struct card *readcards(int serverd, struct card ** deck){
     for(int i = 0; i<3; i++){
         char buff[24];
         read(serverd,buff, 24);
-        // printf("card read: ");
-        // printcard(stringtostruct(buff));
-        // printf("-------\n");
+       
         
-        deck =addAtEnd(deck, stringtostruct(buff));
+        *deck =addAtEnd(*deck, stringtostruct(buff));
     }
     
     return *deck;
