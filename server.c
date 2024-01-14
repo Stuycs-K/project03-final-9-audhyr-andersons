@@ -22,7 +22,7 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
         iterator = iterator->next;
       }
       read(clientd, &choice, sizeof(choice));
-      games(serv, 1,top, choice);
+      games(serv, 1,clie, choice);
 
       
     }
