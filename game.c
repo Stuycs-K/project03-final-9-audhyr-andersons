@@ -22,7 +22,11 @@ struct card * addAtEnd(struct card * beg, struct card * new){
     start->next = new;
     return beg;
 }
-
+char* structtostring(struct card * cards, char* buffer){
+ 
+  sprintf(buffer, "%d %s", cards->value, cards->shape);
+  return buffer;
+}
 void printdeck(struct card * beg){
     //struct car * beg = begg;
     while(beg!=NULL && beg->value != 0){
@@ -170,44 +174,64 @@ struct card * removeindex(struct card ** deck, int index){
 }
 int war(struct card ** pile, struct card ** p1, struct card ** p2){
 //continue function
+        printf("War\n");
         struct card * temp1=*p1;
         struct card * temp2=*p2;
         struct card* temp3=*pile;
         for(int i =0;i<3; i++){
+        //printf("here1?\n");
+
             *pile =addAtEnd(*pile,topcard(p1));
             *pile =addAtEnd(*pile,topcard(p2));
         }
         struct card* prev;
         while(temp3->next!=NULL){
+            //printf("here2?\n");
             prev = temp3;
             temp3 = temp3->next;
             
         }
-        if(prev->value == temp3->value){
+        printf("\n---------------\n");
+        printnice(*pile);
+        printf("\n---------------\n");
+        printnice(*p1);
+        printf("\n---------------\n");
+        printnice(*p2);
+        if((prev->value) == (temp3->value)){
             war(pile, p1,p2);
         }
-        if(prev->value > temp3->value){
-            while(pile!=NULL){
+        else if((prev->value) > (temp3->value)){
+            while(*pile!=NULL){
                 addAtEnd(*p1,topcard(pile));
             }
         }
-        if(prev->value < temp3->value){
-            while(pile!=NULL){
+        else if((prev->value) < (temp3->value)){
+            while(*pile!=NULL){
                 addAtEnd(*p2,topcard(pile));
             }
+        
         }
+        //printf("here3?\n");
         return 1;
         
     
 }
 // Server plays the game and sends the content required to play to the client
-int games(struct card ** p1, int c1, struct card** p2, int c2){
+int games(int clientd,struct card ** p1, int c1, struct card** p2, int c2){
     
-    
+    char buffer[100];
     struct card * pile=NULL;
     
     pile =addAtEnd(pile, removeindex(p1,c1));
     pile =addAtEnd(pile, removeindex(p2,c2));
+    printnice(pile);
+    struct card * temp = pile;
+    // for(int i = 0; i <2;i++){
+
+    
+    // write(clientd, structtostring(temp,buffer), 100);
+    // temp = temp->next;
+    // }
     
 
     

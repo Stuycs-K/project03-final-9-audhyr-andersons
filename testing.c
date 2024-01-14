@@ -20,15 +20,18 @@ int main(){
     
       deck1 = shuffleDeck(genDeck());
       deck2 = splitdeck3(&deck1);
-       printf("DeckSize: %d", deckSize(deck1));
-    printnice(deck1);
-   struct card * test = removeindex(&deck1, 2);
-    printf("\n------\n");
-    printf("DeckSize: %d", deckSize(deck1));
-    printnice(deck1);
+      while(1){
+   
+   char buff[100];
+      fgets(buff, sizeof(buff), stdin);
+      games(1, &deck1, 1, &deck2, 1);
+      // printf("\n---------------\n");
+      // printf("Decksize: %d\n",deckSize(deck1));
+      // printnice(deck1);
+      // printf("\n---------------\n");
+      // printf("Decksize: %d\n",deckSize(deck2));
+      // printnice(deck2);
+      // printf("\n---------------\n");
 
-   printf("removed card test\n");
-   printnice(test);
-
-
+      }
 }

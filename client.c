@@ -42,7 +42,24 @@ int resOrNew(){
 
     return choice;
 }
-
+int selectcard(struct card * deck){
+    printnice(deck); 
+        char buff[100];
+    printf("Please enter which card to pick(1-3): ");
+    fgets(buff, sizeof(buff), stdin);
+    int choice = 0;
+    choice = buff[0] - 48;
+    if(strlen(buff) != 2){
+        printf("%ld\n", strlen(buff));
+        printf("Invalid Input! Your choice is too long\n");
+        selectcard(deck);}
+    else if(choice != 1 && choice != 2 && choice !=3){
+        printf("%ld\n", strlen(buff));
+        printf("Invalid Input! Please pick 1, 2, or 3\n");
+        selectcard(deck);}
+    
+    else return choice;
+}
 int main(int argc, char*argv[]){
     char *ipbuff = malloc(sizeof(char)*30);
     printf("Please enter ip of server: ");
@@ -61,30 +78,23 @@ int main(int argc, char*argv[]){
     while(1){
         deck=NULL;
         deck =readcards(serverd,&deck );
-        printnice(deck); 
+         
         
-         printf("Please enter which card to pick(1-3): ");
-        fgets(buff, sizeof(buff), stdin);
-        int choice = 0;
-        choice = buff[0] - 48;
-        if(strlen(buff) != 2){
-        printf("%ld\n", strlen(buff));
-        printf("Invalid Input!\n");
-        //return resOrNew();
-    }
+        int choice =selectcard(deck);
+        write(serverd, &choice, 4);
+        // struct card * pile;
+        // for(int i = 0; i <2;i++){
 
     
-    else if(choice != 1 && choice != 2 && choice !=3){
-        printf("%d\n", choice);
-        printf("Invalid Input!\n");
-        //return resOrNew();
-    }
-    else{
-        write(serverd, &choice, 4);
+        // read(serverd, buff, 100);
+        // addAtEnd(pile, stringtostruct(buff));
+        // }
+        //printnice(pile);
+    
         
     
         //deck=NULL;
-    }}
+    }
     return 0;
     }
     

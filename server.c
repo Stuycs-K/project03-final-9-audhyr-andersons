@@ -1,28 +1,31 @@
 #include "game.h"
 #include "networking.h"
-char* structtostring(struct card * cards, char* buffer){
+// char* structtostring(struct card * cards, char* buffer){
  
-  sprintf(buffer, "%d %s", cards->value, cards->shape);
-  return buffer;
-}
+//   sprintf(buffer, "%d %s", cards->value, cards->shape);
+//   return buffer;
+// }
 int playgame(int clientd, struct card ** serv, struct card ** clie){
   srand(time(NULL));
-    // printf("Starting client deck:\n");
-    // printnice(*clie);
-    // printf("---------\n");
+    
     while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
       struct card* iterator = *clie;
       for(int i =0;i<3;i++){
         char buff[24];
-        // printf("card wrote: ");
-        // printcard(*clie);
-        // printf("------\n");
+        
         write(clientd, structtostring(iterator, buff), 24);
         iterator = iterator->next;
       }
       read(clientd, &choice, sizeof(choice));
-      games(serv, 1,clie, choice);
+      games(clientd, serv, rand()%3+1,clie, choice);
+      // printf("\n---------------\n");
+      // printf("Decksize: %d\n",deckSize(*clie));
+      // printnice(*clie);
+      // printf("\n---------------\n");
+      // printf("Decksize: %d\n",deckSize(*serv));
+      // printnice(*serv);
+      // printf("\n---------------\n");
 
       
     }
