@@ -22,9 +22,8 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
         iterator = iterator->next;
       }
       read(clientd, &choice, sizeof(choice));
-      //printf("HI1\n");
       games(serv, 1,top, choice);
-      printf("HI2\n");
+
       
     }
 

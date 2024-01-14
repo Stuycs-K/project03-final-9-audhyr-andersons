@@ -151,28 +151,28 @@ int deckSize(struct card* deck){
 
     return size;}
     
-struct card * removeindex(struct card * deck, int index){
-    struct card * prev=deck;
+struct card * removeindex(struct card ** deck, int index){
+    struct card * prev=*deck;
     if(index ==1){
-        return topcard(&deck);
+        return topcard(deck);
     }
         for(int i =1;i<index;i++){
-        prev = deck;
-        deck=deck->next;
+        prev = *deck;
+        *deck=(*deck)->next;
     }
-    prev->next = deck->next;
-    deck->next=NULL;
-    return deck;
+    prev->next = (*deck)->next;
+    (*deck)->next=NULL;
+    return *deck;
 
 }
-int war(struct card * pile, struct card * p1, struct card * p2){
+int war(struct card ** pile, struct card ** p1, struct card ** p2){
 //continue function
-        struct card * temp1=p1;
-        struct card * temp2=p2;
-        struct card* temp3=pile;
+        struct card * temp1=*p1;
+        struct card * temp2=*p2;
+        struct card* temp3=*pile;
         for(int i =0;i<3; i++){
-            pile =addAtEnd(pile,topcard(&p1));
-            pile =addAtEnd(pile,topcard(&p2));
+            *pile =addAtEnd(*pile,topcard(p1));
+            *pile =addAtEnd(*pile,topcard(p2));
         }
         struct card* prev;
         while(temp3->next!=NULL){
@@ -185,12 +185,12 @@ int war(struct card * pile, struct card * p1, struct card * p2){
         }
         if(prev->value > temp3->value){
             while(pile!=NULL){
-                addAtEnd(p1,topcard(&pile));
+                addAtEnd(*p1,topcard(pile));
             }
         }
         if(prev->value < temp3->value){
             while(pile!=NULL){
-                addAtEnd(p2,topcard(&pile));
+                addAtEnd(*p2,topcard(pile));
             }
         }
         return 1;
@@ -214,10 +214,10 @@ int games(struct card ** p1, int c1, struct card** p2, int c2){
     
     struct card * pile=NULL;
     
-    //pile =addAtEnd(pile, removeindex(p1,c1));
-    //pile =addAtEnd(pile, removeindex(p2,c2));
-     pile =addAtEnd(pile, topcard(p1));
-     pile =addAtEnd(pile, topcard(p2));
+    pile =addAtEnd(pile, removeindex(p1,c1));
+    pile =addAtEnd(pile, removeindex(p2,c2));
+     //pile =addAtEnd(pile, topcard(p1));
+     //pile =addAtEnd(pile, topcard(p2));
     //printf("is it here?\n");
 
     //printnice(pile);
@@ -230,7 +230,7 @@ int games(struct card ** p1, int c1, struct card** p2, int c2){
     }
     else if(pile->value < (pile->next)->value){
         
-
+            //client won, send cards to end of client pile
         while(pile!=NULL){
             
             addAtEnd(*p2,topcard(&pile));
@@ -239,7 +239,7 @@ int games(struct card ** p1, int c1, struct card** p2, int c2){
         }
     }
     else if(pile->value == (pile->next)->value){
-        war( pile,  *p1,  *p2);
+        war( &pile,  p1,  p2);
         
         
         //technically could have infinite wars

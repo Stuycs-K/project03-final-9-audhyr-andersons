@@ -42,6 +42,9 @@ Worked on reading and writing structs between the server and the client
 Added functions to make the game work on the server side
 Continued testing networking and cleaning up the client
 Continued adding to server.c and client.c code for hw
+
+### 2024-01-12 - Brief description
+Debugged client.c and server.c to try and make the transfer of cards work
 ## Riasat Audhy
 
 ### 2024-01-03 - Brief description
