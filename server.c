@@ -10,6 +10,7 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
     
     while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
+      char buff[100];
       struct card* iterator = *clie;
       for(int i =0;i<3;i++){
         char buff[24];
@@ -18,6 +19,13 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
         iterator = iterator->next;
       }
       read(clientd, &choice, sizeof(choice));
+      if(choice ==11){
+      read(clientd, buff, sizeof(buff));
+      //printf("Buff: %s\n", buff);
+      saveGame(buff, *clie, *serv);
+      close(clientd);
+      
+    }
       games(clientd, serv, rand()%3+1,clie, choice);
       // printf("\n---------------\n");
       // printf("Decksize: %d\n",deckSize(*clie));
@@ -34,7 +42,9 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
 
 void playAgainstServer(int clientd){
   int choice = 8;
+  
     read(clientd, &choice, sizeof(int));
+    
     //printf("Client's Choice: %d\n", choice);
     struct card* deck1 = NULL;
     struct card* deck2 = NULL;

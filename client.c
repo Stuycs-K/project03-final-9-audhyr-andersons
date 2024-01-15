@@ -1,5 +1,13 @@
 #include "networking.h"
 #include "game.h"
+int quit = 0;
+static void sighandler(int signo){
+    if(signo == SIGINT){
+        printf("\nSaving and quitting(press enter to confirm)\n");
+        quit = 1;
+    }
+
+}
 struct card * stringtostruct(char* string){
     int value;
     char shape[15];
@@ -46,6 +54,7 @@ int multiSelection(){
     char buff[100];
     printf("Would you like to play against the server (0) or another player? (1)");
     fgets(buff, sizeof(buff), stdin);
+    
     if(strlen(buff) != 2){
         printf("%ld\n", strlen(buff));
         printf("Invalid Input!\n");
@@ -66,7 +75,11 @@ int selectcard(struct card * deck){
     printnice(deck); 
         char buff[100];
     printf("Please enter which card to pick(1-3): ");
+    
     fgets(buff, sizeof(buff), stdin);
+    if(quit ==1){
+        return 11;
+    }
     int choice = 0;
     choice = buff[0] - 48;
     if(strlen(buff) != 2){
@@ -81,6 +94,7 @@ int selectcard(struct card * deck){
     else return choice;
 }
 int main(int argc, char*argv[]){
+    signal(SIGINT, sighandler);
     char *ipbuff = malloc(sizeof(char)*30);
     printf("Please enter ip of server: ");
     fgets(ipbuff, sizeof(char)*30, stdin);
@@ -104,6 +118,15 @@ int main(int argc, char*argv[]){
         
         int choice =selectcard(deck);
         write(serverd, &choice, 4);
+        if(choice ==11){
+            
+        printf("Please enter which name to be saved under: ");
+    
+        fgets(buff, sizeof(buff), stdin);
+        write(serverd, buff, sizeof(buff));
+        close(serverd);
+        exit(0);
+        }
         struct card * pile=NULL;
         //
         printf("Pile:\n");
