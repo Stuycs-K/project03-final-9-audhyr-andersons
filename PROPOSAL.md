@@ -20,39 +20,22 @@ We will write to a file when saving data and retrieve it when resuming a match p
 
 If expand the game to host multiple players we will use forking to fork a subhost.
 
-We will use signals like SIGQUIT to autosave and exit and other signals for things not for stdin.
-
-
-
-The deck of cards will be a linked list of structs for each card
-struct:
-int value
-char* shape
-
-Struct to include player and game details:
-char* name
-int gameswon
-char* filename
-
-
-
-
+We will use signals like SIGINT to autosave and exit and other signals for things not for stdin.
     
 # Intended pacing:
 
 By Monday the 8th we plan to have the basic logic of the game coded.
 We also plan to have all of the features we will implement thought out and writen in psudo code.
-card shuffling(send all the cards into 2 temporary decks and then merge the two: repeat many times)
+card shuffling(send all the cards into 2 temporary decks and then merge the two: repeat many times) (Spencer and Riasat)
 
-Then we'd connect a client and a host that could play with each other.
+Then we'd connect a client and a host that could play with each other. (Spencer)
 
-Then implement saving
+Then implement saving (Riasat)
 
-Then Signals
+Then Signals (Spencer)
 
-Then a forking game (Connecting many clients to subhosts)
+Then a forking game (Connecting many clients to subhosts) (Riasat)
 
-Then Multiplayer (clients with each other or with subhosts)
+Then Multiplayer (clients with each other or with subhosts) (Riasat)
 
-Interface: so players can choose to save and whether to play against a host or another player.
-Also a way to view games played and leaderboard.
+Interface: so players can choose to save and whether to play against a host or another player. (Spencer)
