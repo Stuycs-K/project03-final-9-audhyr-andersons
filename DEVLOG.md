@@ -83,3 +83,8 @@ connects to the server, and sends over a choice.
 ### 2024-01-12 - Brief description
 New & improved implementation of split deck! Also fixed games, and correspondingly adjusted playgames (still has a few unrelated issues to debug). Also added a bit to makefile clean.
 
+### 2024-01-14 - Brief description
+I cleaned up some stuff in game-setup which fixed the issue with decks not being random. I also fixed the problem of seemingly random cards (deck was unintentionally being partially iterated through) being used in the game.
+
+### 2024-01-15 - Brief description
+I added forking for the server to take multiple clients and also made it so clients can choose to play with other clients or against the server. 
