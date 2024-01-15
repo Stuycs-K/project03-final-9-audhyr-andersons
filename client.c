@@ -42,6 +42,26 @@ int resOrNew(){
 
     return choice;
 }
+int multiSelection(){
+    char buff[100];
+    printf("Would you like to play against the server (0) or another player? (1)");
+    fgets(buff, sizeof(buff), stdin);
+    if(strlen(buff) != 2){
+        printf("%ld\n", strlen(buff));
+        printf("Invalid Input!\n");
+        return multiSelection();
+    }
+
+    int choice = 5;
+    choice = buff[0] - 48;
+    if(choice != 0 && choice != 1){
+        printf("%d\n", choice);
+        printf("Invalid Input!\n");
+        return multiSelection();
+    }
+
+    return choice;
+}
 int selectcard(struct card * deck){
     printnice(deck); 
         char buff[100];
@@ -64,11 +84,13 @@ int main(int argc, char*argv[]){
     char *ipbuff = malloc(sizeof(char)*30);
     printf("Please enter ip of server: ");
     fgets(ipbuff, sizeof(char)*30, stdin);
-    //strsep(&ipbuff, "\3");
+
     if(ipbuff[strlen(ipbuff)-1] == '\n') ipbuff[strlen(ipbuff)-1] = '\0';
-    //printf("entered ip: |%s|", ipbuff);
     int serverd= client_tcp_handshake(ipbuff);
     printf("connected!\n");
+
+    int m = multiSelection();
+    write(serverd, &m, sizeof(int));
 
     int c = resOrNew();
     write(serverd, &c, sizeof(int));
