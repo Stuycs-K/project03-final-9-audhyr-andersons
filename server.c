@@ -62,7 +62,7 @@ int main(int argc, char*argv[]){
       continue;
     }
 
-    int multi2 = 8;
+    int multi2 = 0;
     int client2 = 0;
     while(!multi2){
       client2 = server_tcp_handshake(listeningsocket);
