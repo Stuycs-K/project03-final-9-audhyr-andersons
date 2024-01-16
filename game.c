@@ -265,6 +265,55 @@ int games(int clientd,struct card ** p1, int c1, struct card** p2, int c2){
 
 }
 
+int games2(int clientd, int client2, struct card ** p1, int c1, struct card** p2, int c2){
+    
+    char buffer[100];
+    struct card * pile=NULL;
+    
+    pile =addAtEnd(pile, removeindex(p1,c1));
+    pile =addAtEnd(pile, removeindex(p2,c2));
+    //printnice(pile);
+    struct card * temp = pile;
+    for(int i = 0; i <deckSize(pile);i++){
+        
+    write(clientd, structtostring(temp,buffer), 100);
+    write(client2, structtostring(temp,buffer), 100);
+   // printf("here2\n");
+    temp = temp->next;
+    //
+    }
+    
+
+    
+    if(pile->value > (pile->next)->value){
+        while(pile!=NULL){
+            addAtEnd(*p1,topcard(&pile));
+            
+         
+        }
+    }
+    else if(pile->value < (pile->next)->value){
+        
+            //client won, send cards to end of client pile
+        while(pile!=NULL){
+            
+            addAtEnd(*p2,topcard(&pile));
+           
+            
+        }
+    }
+    else if(pile->value == (pile->next)->value){
+        war( &pile,  p1,  p2);
+        
+        
+        //technically could have infinite wars
+
+    }
+    return 1;
+    //if(temp1->value>temp2->value);
+
+}
+
 // Saves the game to a file named whatever the player name is, with
 // the player deck being written to the file first.
 void saveGame(char* player, struct card* pDeck, struct card* sDeck){

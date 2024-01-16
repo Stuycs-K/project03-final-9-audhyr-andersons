@@ -6,15 +6,12 @@
 //   return buffer;
 // }
 int playgame(int clientd, struct card ** serv, struct card ** clie){
-  
-    
     while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
       int choice;
       char buff[100];
       struct card* iterator = *clie;
       for(int i =0;i<3;i++){
         char buff[24];
-        
         write(clientd, structtostring(iterator, buff), 24);
         iterator = iterator->next;
       }
@@ -24,21 +21,44 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
       //printf("Buff: %s\n", buff);
       saveGame(buff, *clie, *serv);
       close(clientd);
-      
     }
       games(clientd, serv, rand()%3+1,clie, choice);
-      // printf("\n---------------\n");
-      // printf("Decksize: %d\n",deckSize(*clie));
-      // printnice(*clie);
-      // printf("\n---------------\n");
-      // printf("Decksize: %d\n",deckSize(*serv));
-      // printnice(*serv);
-      // printf("\n---------------\n");
+    }
+}
 
-      
+int playgame2(int client1, int client2, struct card** deck1, struct card** deck2){
+  while(deckSize(*deck1) && deckSize(*deck2)){
+    int cardChoice1;
+    int cardChoice2;
+    char buff1[100];
+    char buff2[100];
+
+    struct card* iterator = *deck1;
+    for(int i = 0; i < 3; i++){
+      char buffer[24];
+      write(client1, structtostring(iterator, buffer), 24);
+      iterator = iterator->next;
+    }
+    iterator = *deck2;
+    for(int i = 0; i < 3; i++){
+      char buffer[24];
+      write(client2, structtostring(iterator, buffer), 24);
+      iterator = iterator->next;
     }
 
+    read(client1, &cardChoice1, sizeof(cardChoice1));
+    read(client2, &cardChoice2, sizeof(cardChoice2));
+
+    if(cardChoice1 == 11 || cardChoice2 == 11){ //what happens when 1 player disconnects but the other doesnt? 
+      close(client1);
+      close(client2);
+    }
+
+    games2(client1, client2, deck1, cardChoice1, deck2, cardChoice2);
+
+  }
 }
+
 
 void playAgainstServer(int clientd){
   int choice = 8;
@@ -53,6 +73,12 @@ void playAgainstServer(int clientd){
       deck2 = splitdeck3(&deck1);
     }
     playgame(clientd,&deck1,&deck2);
+}
+
+void playAgainstPlayer(int client1, int client2){
+  struct card* deck1 = shuffleDeck(genDeck());
+  struct card* deck2 = splitdeck3(&deck1);
+  playgame2(client1, client2, &deck1, &deck2);
 }
 
 int main(int argc, char*argv[]){
@@ -87,8 +113,13 @@ int main(int argc, char*argv[]){
       }
     }
 
-    printf("2 PLAYERS WANT TO FIGHT!\n");
+    int sub = fork();
+    if(!sub){
+      playAgainstPlayer(clientd, client2);
+      return 0;
+    }
 
+    close(client2);
     close(clientd);
   }
   return 0;
