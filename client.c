@@ -110,14 +110,22 @@ int main(int argc, char*argv[]){
     write(serverd, &c, sizeof(int));
     struct card* deck;
     char buff[100];
-
+    if(c ==2){
+            printf("Please enter which name the game is saved under: \n");
+            fgets(buff, sizeof(buff), stdin);
+            write(serverd, buff, sizeof(buff));
+        }
     while(1){
         deck=NULL;
+        int size=0;
+        read(serverd, &size, sizeof(int));
+        printf("Number of Cards in Deck: %d\n", size);
         deck =readcards(serverd,&deck );
          
         
         int choice =selectcard(deck);
         write(serverd, &choice, 4);
+        
         if(choice ==11){
             
         printf("Please enter which name to be saved under: ");
