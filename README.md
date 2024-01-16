@@ -20,9 +20,13 @@ Exit with ctrl+c
 
 ##FEATURES:
 Play war against server or other clients over sockets
+
 Save game to file and resume game
+
 Use Signals to quit and save game
+
 All files and data stored on server.
+
 Server can play against many clients at once
 ### ISSUES:
 
