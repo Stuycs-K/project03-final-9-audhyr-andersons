@@ -97,8 +97,12 @@ void playAgainstServer(int clientd){
 }
 
 void playAgainstPlayer(int client1, int client2){
-  struct card* deck1 = shuffleDeck(genDeck());
-  struct card* deck2 = splitdeck3(&deck1);
+  //  struct card* deck1 = shuffleDeck(genDeck());
+  //  struct card* deck2 = splitdeck3(&deck1);
+  struct card* deck1 = NULL;
+  struct card* deck2 = NULL;
+  for(int i = 0; i < 10; i++) deck1 = addAtEnd(deck1, newcard(12, "Hearts"));
+  for(int i = 0; i < 10; i++) deck2 = addAtEnd(deck2, newcard(2, "Hearts"));
   playgame2(client1, client2, &deck1, &deck2);
 }
 

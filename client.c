@@ -141,7 +141,15 @@ int main(int argc, char*argv[]){
         deck=NULL;
         int size=0;
         read(serverd, &size, sizeof(int));
-        
+        if(size == 0){
+            printf("Your deck is empty. You lose!\n");
+            close(serverd);
+            exit(0);
+        }
+        if(size == 20){
+            printf("The opponent's deck is empty. You Win!\n");
+            exit(0);
+        }
         printf("Number of Cards in Deck: %d\n", size);
         deck =readcards(serverd,&deck );
         if(deck == NULL) exit(0);
