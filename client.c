@@ -32,7 +32,7 @@ int resOrNew(){
     
     
     char buff[100];
-    printf("Would you like to start a new game (1) or resume old one (2)?");
+    printf("Would you like to start a new game (1) or resume old one (2)? ");
     fgets(buff, sizeof(buff), stdin);
     if(strlen(buff) != 2){
         printf("%ld\n", strlen(buff));
@@ -52,7 +52,7 @@ int resOrNew(){
 }
 int multiSelection(){
     char buff[100];
-    printf("Would you like to play against the server (0) or another player? (1)");
+    printf("Would you like to play against the server (0) or another player? (1) ");
     fgets(buff, sizeof(buff), stdin);
     
     if(strlen(buff) != 2){
@@ -72,6 +72,7 @@ int multiSelection(){
     return choice;
 }
 int selectcard(struct card * deck){
+    printf("Top 3 cards in hand:\n");
     printnice(deck); 
         char buff[100];
     printf("Please enter which card to pick(1-3): ");
@@ -101,44 +102,44 @@ int main(int argc, char*argv[]){
 
     if(ipbuff[strlen(ipbuff)-1] == '\n') ipbuff[strlen(ipbuff)-1] = '\0';
     int serverd= client_tcp_handshake(ipbuff);
-    printf("connected!\n");
+    printf("Welcome to War!\n");
 
     int m = multiSelection();
     write(serverd, &m, sizeof(int));
 
-    int c = resOrNew();
-    write(serverd, &c, sizeof(int));
+    if(!m){
+        int c = resOrNew();
+        write(serverd, &c, sizeof(int));
+    }
+
+
     struct card* deck;
     char buff[100];
 
+    if(m) printf("Looking for opponent...\n");
     while(1){
         deck=NULL;
         deck =readcards(serverd,&deck );
          
         
         int choice =selectcard(deck);
+        if(m) printf("Waiting for opponent's move...\n");
         write(serverd, &choice, 4);
         if(choice ==11){
-            
-        printf("Please enter which name to be saved under: ");
-    
-        fgets(buff, sizeof(buff), stdin);
-        write(serverd, buff, sizeof(buff));
-        close(serverd);
-        exit(0);
+            printf("Please enter which name to be saved under: ");
+            fgets(buff, sizeof(buff), stdin);
+            write(serverd, buff, sizeof(buff));
+            close(serverd);
+            exit(0);
         }
         struct card * pile=NULL;
-        //
-        printf("Pile:\n");
         for(int i = 0; i <2;i++){
-
-            //printf("here1?\n");
-        read(serverd, buff, 100);
-        //printf("%s\n", buff);
-        //addAtEnd(pile, stringtostruct(buff));
-        
-        printnice(newcard(stringtostruct(buff)->value, stringtostruct(buff)->shape));
+            read(serverd, buff, 100);
+            if(i == 0) printf("Pile:\n");
+            printnice(newcard(stringtostruct(buff)->value, stringtostruct(buff)->shape));
+            //addAtEnd(pile, stringtostruct(buff));
         }
+
         printf("------\n");
         //printnice(pile);
     
