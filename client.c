@@ -28,7 +28,11 @@ struct card *readcards(int serverd, struct card ** deck){
     struct card* temp = *deck;
     for(int i = 0; i<3; i++){
         char buff[24];
-        read(serverd,buff, 24);
+        int check = read(serverd,buff, 24);
+        if(check == 0){
+            printf("Opponent disconnected. You win!\n");
+            return NULL;
+        }
        
         
         *deck =addAtEnd(*deck, stringtostruct(buff));
@@ -137,8 +141,10 @@ int main(int argc, char*argv[]){
         deck=NULL;
         int size=0;
         read(serverd, &size, sizeof(int));
+        
         printf("Number of Cards in Deck: %d\n", size);
         deck =readcards(serverd,&deck );
+        if(deck == NULL) exit(0);
          
         
         int choice =selectcard(deck);
@@ -154,7 +160,11 @@ int main(int argc, char*argv[]){
         }
         struct card * pile=NULL;
         for(int i = 0; i <2;i++){
-            read(serverd, buff, 100);
+            int check = read(serverd, buff, 100);
+            if(check == 0){
+                printf("Opponent disconnected. You win!\n");
+                exit(0);
+            }
             if(i == 0) printf("Pile:\n");
             printnice(newcard(stringtostruct(buff)->value, stringtostruct(buff)->shape));
             //addAtEnd(pile, stringtostruct(buff));

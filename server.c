@@ -55,8 +55,16 @@ int playgame2(int client1, int client2, struct card** deck1, struct card** deck2
     
     //close(clientd); added by auto merge????
 
-    read(client1, &cardChoice1, sizeof(cardChoice1));
+    int check = read(client1, &cardChoice1, sizeof(cardChoice1));
+    if(check == 0){
+      close(client2);
+      return 0;
+    }
     read(client2, &cardChoice2, sizeof(cardChoice2));
+    if(check == 0){
+      close(client1);
+      return 0;
+    }
 
     if(cardChoice1 == 11 || cardChoice2 == 11){ //what happens when 1 player disconnects but the other doesnt? 
       close(client1);
@@ -93,6 +101,8 @@ void playAgainstPlayer(int client1, int client2){
   struct card* deck2 = splitdeck3(&deck1);
   playgame2(client1, client2, &deck1, &deck2);
 }
+
+
 
 int main(int argc, char*argv[]){
   int listeningsocket = server_setup();
