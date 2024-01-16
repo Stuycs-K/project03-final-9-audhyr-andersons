@@ -10,7 +10,10 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
       int choice;
       char buff[100];
       struct card* iterator = *clie;
+      int size = deckSize(*clie);
+      write(clientd, &size, sizeof(int));
       for(int i =0;i<3;i++){
+        
         char buff[24];
         write(clientd, structtostring(iterator, buff), 24);
         iterator = iterator->next;
@@ -45,6 +48,8 @@ int playgame2(int client1, int client2, struct card** deck1, struct card** deck2
       write(client2, structtostring(iterator, buffer), 24);
       iterator = iterator->next;
     }
+    
+    close(clientd);
 
     read(client1, &cardChoice1, sizeof(cardChoice1));
     read(client2, &cardChoice2, sizeof(cardChoice2));
@@ -64,13 +69,17 @@ void playAgainstServer(int clientd){
   int choice = 8;
   
     read(clientd, &choice, sizeof(int));
-    
+    char buff[100];
     //printf("Client's Choice: %d\n", choice);
     struct card* deck1 = NULL;
     struct card* deck2 = NULL;
     if(choice ==1){
       deck1 = shuffleDeck(genDeck());
       deck2 = splitdeck3(&deck1);
+    }
+    if(choice ==2){
+      read(clientd, buff, sizeof(buff));
+      loadGame(buff, &deck2, &deck1);
     }
     playgame(clientd,&deck1,&deck2);
 }
