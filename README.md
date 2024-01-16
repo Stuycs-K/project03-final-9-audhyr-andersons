@@ -16,6 +16,8 @@ The server runs the game by running the command make server
 
 The clients run it by running make client
 
+Exit with ctrl+c
+
 
 ### ISSUES:
 
