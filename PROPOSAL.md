@@ -20,7 +20,7 @@ We will write to a file when saving data and retrieve it when resuming a match p
 
 If expand the game to host multiple players we will use forking to fork a subhost.
 
-We will use signals like SIGINT to autosave and exit and other signals for things not for stdin.
+We will use signals like SIGINT to autosave (saving is only for player vs server, not pvp) and exit and other signals for things not for stdin.
     
 # Intended pacing:
 
@@ -30,7 +30,7 @@ card shuffling(send all the cards into 2 temporary decks and then merge the two:
 
 Then we'd connect a client and a host that could play with each other. (Spencer)
 
-Then implement saving (Riasat)
+Then implement saving (Riasat) - 
 
 Then Signals (Spencer)
 
