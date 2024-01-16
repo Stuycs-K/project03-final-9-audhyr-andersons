@@ -3,9 +3,10 @@
 int quit = 0;
 int m = 0;
 int serverd;
+int started = 0;
 static void sighandler(int signo){
     if(signo == SIGINT){
-        if(m) {
+        if(m || !started) {
             printf("\nExiting game.\n");
             close(serverd);
             exit(0);
@@ -126,7 +127,7 @@ int main(int argc, char*argv[]){
         c = resOrNew();
         write(serverd, &c, sizeof(int));
     }
-
+    
 
     struct card* deck;
     char buff[100];
@@ -142,6 +143,7 @@ int main(int argc, char*argv[]){
         deck=NULL;
         int size=0;
         read(serverd, &size, sizeof(int));
+        started = 1;
         printf("Number of Cards in Deck: %d\n", size);
         if(size == 0){
             printf("Your deck is empty. You lose!\n");
