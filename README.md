@@ -19,7 +19,7 @@ The clients run it by running make client
 Exit with ctrl+c
 
 ##FEATURES:
-Play wat against server or other clients over sockets
+Play war against server or other clients over sockets
 Save game to file and resume game
 Use Signals to quit and save game
 All files and data stored on server.
