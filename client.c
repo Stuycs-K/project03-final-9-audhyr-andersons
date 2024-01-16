@@ -35,7 +35,7 @@ struct card *readcards(int serverd, struct card ** deck){
         }
        
         
-        *deck =addAtEnd(*deck, stringtostruct(buff));
+        if(strcmp(buff, "88888888888888888888888") != 0)*deck =addAtEnd(*deck, stringtostruct(buff));
         temp = *deck;
     }
     
@@ -85,7 +85,8 @@ int multiSelection(){
     return choice;
 }
 int selectcard(struct card * deck){
-    printf("Top 3 cards in hand:\n");
+    if(deckSize(deck) <= 3) printf("Cards in hand:\n");
+    else printf("Top 3 cards in hand:\n");
     printnice(deck); 
         char buff[100];
     printf("Please enter which card to pick(1-3): ");
@@ -141,16 +142,16 @@ int main(int argc, char*argv[]){
         deck=NULL;
         int size=0;
         read(serverd, &size, sizeof(int));
+        printf("Number of Cards in Deck: %d\n", size);
         if(size == 0){
             printf("Your deck is empty. You lose!\n");
             close(serverd);
             exit(0);
         }
-        if(size == 20){
+        if(size == 52){
             printf("The opponent's deck is empty. You Win!\n");
             exit(0);
         }
-        printf("Number of Cards in Deck: %d\n", size);
         deck =readcards(serverd,&deck );
         if(deck == NULL) exit(0);
          

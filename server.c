@@ -6,17 +6,21 @@
 //   return buffer;
 // }
 int playgame(int clientd, struct card ** serv, struct card ** clie){
-    while((deckSize(*serv)!=0) || (deckSize(*clie)!=0) ){
+    while(1){
       int choice;
       char buff[100];
       struct card* iterator = *clie;
       int size = deckSize(*clie);
       write(clientd, &size, sizeof(int));
+      if(size == 0) break;
       for(int i =0;i<3;i++){
         
         char buff[24];
-        write(clientd, structtostring(iterator, buff), 24);
-        iterator = iterator->next;
+        if(size - i > 0){
+          write(clientd, structtostring(iterator, buff), 24);
+          iterator = iterator->next;
+        }
+        else write(clientd, "88888888888888888888888", 24);
       }
       read(clientd, &choice, sizeof(choice));
       if(choice ==11){
@@ -25,12 +29,13 @@ int playgame(int clientd, struct card ** serv, struct card ** clie){
       saveGame(buff, *clie, *serv);
       close(clientd);
     }
-      games(clientd, serv, rand()%3+1,clie, choice);
+      if(deckSize(*serv) <= 3) games(clientd, serv, rand()%(deckSize(*serv))+1,clie, choice);
+      else games(clientd, serv, rand()%3+1,clie, choice);
     }
 }
 
 int playgame2(int client1, int client2, struct card** deck1, struct card** deck2){
-  while(deckSize(*deck1) && deckSize(*deck2)){
+  while(1){
     int cardChoice1;
     int cardChoice2;
     char buff1[100];
@@ -38,19 +43,28 @@ int playgame2(int client1, int client2, struct card** deck1, struct card** deck2
 
     struct card* iterator = *deck1;
     int size = deckSize(*deck1);
+    int size2 = deckSize(*deck2);
     write(client1, &size, sizeof(int));
+    write(client2, &size2, sizeof(int));
+    if(size == 0 || size2 == 0){
+      break;
+    }
     for(int i = 0; i < 3; i++){
       char buffer[24];
-      write(client1, structtostring(iterator, buffer), 24);
-      iterator = iterator->next;
+      if(size - i > 0){
+        write(client1, structtostring(iterator, buffer), 24);
+        iterator = iterator->next;
+      }
+      else write(client1, "88888888888888888888888", 24);
     }
     iterator = *deck2;
-    size = deckSize(*deck2);
-    write(client2, &size, sizeof(int));
     for(int i = 0; i < 3; i++){
       char buffer[24];
-      write(client2, structtostring(iterator, buffer), 24);
-      iterator = iterator->next;
+      if(size2 - i > 0){
+        write(client2, structtostring(iterator, buffer), 24);
+        iterator = iterator->next;
+      }
+      else write(client2, "88888888888888888888888", 24);
     }
     
     //close(clientd); added by auto merge????
@@ -72,7 +86,6 @@ int playgame2(int client1, int client2, struct card** deck1, struct card** deck2
     }
 
     games2(client1, client2, deck1, cardChoice1, deck2, cardChoice2);
-
   }
 }
 
@@ -97,12 +110,12 @@ void playAgainstServer(int clientd){
 }
 
 void playAgainstPlayer(int client1, int client2){
-  //  struct card* deck1 = shuffleDeck(genDeck());
-  //  struct card* deck2 = splitdeck3(&deck1);
-  struct card* deck1 = NULL;
-  struct card* deck2 = NULL;
-  for(int i = 0; i < 10; i++) deck1 = addAtEnd(deck1, newcard(12, "Hearts"));
-  for(int i = 0; i < 10; i++) deck2 = addAtEnd(deck2, newcard(2, "Hearts"));
+   struct card* deck1 = shuffleDeck(genDeck());
+   struct card* deck2 = splitdeck3(&deck1);
+  // struct card* deck1 = NULL;
+  // struct card* deck2 = NULL;
+  // for(int i = 0; i < 4; i++) deck1 = addAtEnd(deck1, newcard(12, "Hearts"));
+  // for(int i = 0; i < 4; i++) deck2 = addAtEnd(deck2, newcard(2, "Hearts"));
   playgame2(client1, client2, &deck1, &deck2);
 }
 
