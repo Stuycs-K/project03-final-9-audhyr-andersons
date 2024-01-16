@@ -37,19 +37,23 @@ int playgame2(int client1, int client2, struct card** deck1, struct card** deck2
     char buff2[100];
 
     struct card* iterator = *deck1;
+    int size = deckSize(*deck1);
+    write(client1, &size, sizeof(int));
     for(int i = 0; i < 3; i++){
       char buffer[24];
       write(client1, structtostring(iterator, buffer), 24);
       iterator = iterator->next;
     }
     iterator = *deck2;
+    size = deckSize(*deck2);
+    write(client2, &size, sizeof(int));
     for(int i = 0; i < 3; i++){
       char buffer[24];
       write(client2, structtostring(iterator, buffer), 24);
       iterator = iterator->next;
     }
     
-    close(clientd);
+    //close(clientd); added by auto merge????
 
     read(client1, &cardChoice1, sizeof(cardChoice1));
     read(client2, &cardChoice2, sizeof(cardChoice2));

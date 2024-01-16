@@ -1,10 +1,19 @@
 #include "networking.h"
 #include "game.h"
 int quit = 0;
+int m = 0;
+int serverd;
 static void sighandler(int signo){
     if(signo == SIGINT){
-        printf("\nSaving and quitting(press enter to confirm)\n");
-        quit = 1;
+        if(m) {
+            printf("\nExiting game.\n");
+            close(serverd);
+            exit(0);
+        }
+        else {
+            printf("\nSaving and quitting(press enter to confirm)\n");
+            quit = 1;
+        }
     }
 
 }
@@ -104,11 +113,12 @@ int main(int argc, char*argv[]){
     int serverd= client_tcp_handshake(ipbuff);
     printf("Welcome to War!\n");
 
-    int m = multiSelection();
+    m = multiSelection();
     write(serverd, &m, sizeof(int));
 
+    int c = 999;
     if(!m){
-        int c = resOrNew();
+        c = resOrNew();
         write(serverd, &c, sizeof(int));
     }
 
